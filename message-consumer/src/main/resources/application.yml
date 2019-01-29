@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: Message-Consumer
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: axd
+    password: axd@rabbitmq
+    publisher-confirms: true
+  cloud:
+    stream:
+      bindings:
+        ORDER_MESSAGE_INPUT_CHANNEL:
+          destination: OrderMainMessage
+          group: ORDER_MESSAGE_GROUP
+        MERCHANDISE_MESSAGE_INPUT_CHANNEL:
+          destination: MERCHANDISE_MESSAGE
+          group: MERCHANDISE_MESSAGE_GROUP

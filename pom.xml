@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.pistachio</groupId>
+	<artifactId>pistachio</artifactId>
+	<packaging>pom</packaging>
+	<version>0.0.1</version>
+	<name>聚合项目</name>
+	<modules>
+		<module>parent</module>
+		<module>common-utilities</module>
+		<module>user-api</module>
+		<module>authority-api</module>
+		<module>merchandise-api</module>
+		<module>merchant-api</module>
+		<module>order-api</module>
+		<module>activity-api</module>
+		<module>points-api</module>
+		<module>employee-api</module>
+		<module>logistics-api</module>
+		<module>manager-api</module>
+		<module>inventory-api</module>
+		<module>cloud-service-api</module>
+		<module>gateway</module>
+		<module>sensors-data</module>
+		<module>message-consumer</module>
+		<module>message-producer</module>
+		<module>activity-provider</module>
+		<module>authority-provider</module>
+		<module>cloud-service-provider</module>
+		<module>employee-provider</module>
+		<module>search-api</module>
+		<module>search-provider</module>
+		<module>inventory-provider</module>
+		<module>logistics-provider</module>
+		<module>manager-provider</module>
+		<module>merchandise-provider</module>
+		<module>merchant-provider</module>
+		<module>order-provider</module>
+		<module>points-provider</module>
+		<module>user-provider</module>
+	</modules>
+	<description>这都是要学的后台技术</description>
+
+</project>
