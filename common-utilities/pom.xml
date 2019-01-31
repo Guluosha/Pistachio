@@ -18,4 +18,5 @@
 			<artifactId>spring-cloud-starter</artifactId>
 		</dependency>
 	</dependencies>
+
 </project>
