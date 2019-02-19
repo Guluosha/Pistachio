@@ -12,6 +12,8 @@
 	<modules>
 		<module>parent</module>
 		<module>common-utilities</module>
+		<module>gateway</module>
+
 		<module>user-api</module>
 		<module>authority-api</module>
 		<module>merchandise-api</module>
@@ -24,24 +26,25 @@
 		<module>manager-api</module>
 		<module>inventory-api</module>
 		<module>cloud-service-api</module>
-		<module>gateway</module>
-		<module>sensors-data</module>
-		<module>message-consumer</module>
-		<module>message-producer</module>
-		<module>activity-provider</module>
-		<module>authority-provider</module>
-		<module>cloud-service-provider</module>
-		<module>employee-provider</module>
 		<module>search-api</module>
-		<module>search-provider</module>
-		<module>inventory-provider</module>
-		<module>logistics-provider</module>
-		<module>manager-provider</module>
+
+		<module>user-provider</module>
+		<module>authority-provider</module>
 		<module>merchandise-provider</module>
 		<module>merchant-provider</module>
 		<module>order-provider</module>
+		<module>activity-provider</module>
 		<module>points-provider</module>
-		<module>user-provider</module>
+		<module>employee-provider</module>
+		<module>logistics-provider</module>
+		<module>manager-provider</module>
+		<module>inventory-provider</module>
+		<module>cloud-service-provider</module>
+		<module>search-provider</module>
+
+		<module>message-producer</module>
+		<module>message-consumer</module>
+		<module>sensors-data</module>
 	</modules>
 	<description>这都是要学的后台技术</description>
 
