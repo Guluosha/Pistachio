@@ -302,4 +302,24 @@
 			<layout>default</layout>
 		</repository>
 	</distributionManagement>
+
+	<profiles>
+		<profile>
+			<id>local-repository</id>
+			<repositories>
+				<repository>
+					<id>local-repository</id>
+					<name>本地仓库</name>
+					<layout>default</layout>
+					<url>D:\MavenRepository</url>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
 </project>
