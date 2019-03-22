@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: pistachio-gateway
+    admin:
+      enabled: true
+server:
+  port: 8080
+filter:
+  normal:
+    url:
+  auth:
+    url:
+zuul:
+  routes: 
