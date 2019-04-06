@@ -9,7 +9,7 @@ package org.pistachio.utilities.constants;
  * @date 2019/4/6 ~ 下午 6:27
  */
 
-public interface DataTimeFormatConstant {
+public interface DateTimeFormatConstant {
 
     /**
      * 年月日（yyyy-MM-dd）
