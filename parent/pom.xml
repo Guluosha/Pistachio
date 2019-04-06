@@ -242,13 +242,6 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.9.1</version>
 		</dependency>
-
-		<!-- 项目模块 -->
-		<dependency>
-			<groupId>org.pistachio</groupId>
-			<artifactId>common-utilities</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 	</dependencies>
 
 	<!-- 构建定义 -->
