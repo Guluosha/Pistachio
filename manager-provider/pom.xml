@@ -10,6 +10,5 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>manager-provider</artifactId>
-	<name>管理微服务</name>
 
 </project>

@@ -10,6 +10,5 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>search-api</artifactId>
-	<name>搜索API</name>
 
 </project>

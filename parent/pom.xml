@@ -11,7 +11,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>parent</artifactId>
 	<packaging>pom</packaging>
-	<name>公共依赖配置</name>
 
 	<properties>
 		<!-- Spring全家桶依赖版本 -->

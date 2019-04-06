@@ -10,6 +10,5 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>merchant-provider</artifactId>
-	<name>店铺微服务</name>
 
 </project>

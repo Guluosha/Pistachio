@@ -10,7 +10,6 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>common-utilities</artifactId>
-	<name>公共工具</name>
 
 	<dependencies>
 		<dependency>

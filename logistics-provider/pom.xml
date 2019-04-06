@@ -10,6 +10,5 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>logistics-provider</artifactId>
-	<name>物流微服务</name>
 
 </project>

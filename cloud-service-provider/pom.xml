@@ -10,6 +10,5 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>cloud-service-provider</artifactId>
-	<name>云服务微服务</name>
 
 </project>

@@ -10,7 +10,6 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>message-consumer</artifactId>
-	<name>消息消费者</name>
 
 	<dependencies>
 		<dependency>
