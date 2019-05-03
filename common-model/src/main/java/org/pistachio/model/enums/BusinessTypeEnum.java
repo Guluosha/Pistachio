@@ -10,7 +10,81 @@ package org.pistachio.model.enums;
  */
 
 public enum BusinessTypeEnum {
-    ;
+
+    /**
+     * 活动业务
+     */
+    ACTIVITY_BUSINESS(1),
+
+    /**
+     * 授权业务
+     */
+    AUTHORITY_BUSINESS(2),
+
+    /**
+     * 云服务业务
+     */
+    CLOUD_BUSINESS(3),
+
+    /**
+     * 员工业务
+     */
+    EMPLOYEE_BUSINESS(4),
+
+    /**
+     * 库存业务
+     */
+    INVENTORY_BUSINESS(5),
+
+    /**
+     * 物流业务
+     */
+    LOGISTICS_BUSINESS(6),
+
+    /**
+     * 管理业务
+     */
+    MANAGER_BUSINESS(7),
+
+    /**
+     * 商品业务
+     */
+    MERCHANDISE_BUSINESS(8),
+
+    /**
+     * 店铺业务
+     */
+    MERCHANT_BUSINESS(9),
+
+    /**
+     * 消息业务
+     */
+    MESSAGE_BUSINESS(10),
+
+    /**
+     * 订单业务
+     */
+    ORDER_BUSINESS(11),
+
+    /**
+     * 积分业务
+     */
+    POINTS_BUSINESS(12),
+
+    /**
+     * 搜索业务
+     */
+    SEARCH_BUSINESS(13),
+
+    /**
+     * 神策统计业务
+     */
+    SENSORS_BUSINESS(14),
+
+    /**
+     * 用户业务
+     */
+    USER_BUSINESS(15);
 
     private Integer businessTypeSerialNumber;
 
