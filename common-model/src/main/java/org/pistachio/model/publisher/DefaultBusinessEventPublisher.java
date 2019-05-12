@@ -7,6 +7,7 @@ import org.pistachio.model.event.abstracts.AbstractBusinessVoEvent;
 import org.pistachio.model.listener.interfaces.BusinessEventListener;
 import org.pistachio.model.listener.interfaces.ExceptionHandler;
 import org.pistachio.model.publisher.base.BusinessEventPublisher;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -32,11 +33,14 @@ public class DefaultBusinessEventPublisher implements BusinessEventPublisher {
 
     private Set<BusinessEventListener> businessEventListenerSet = Collections.emptySet();
 
+    @Resource
+    private ApplicationContext applicationContext;
+
     @Getter
     @Setter
     private ExceptionHandler exceptionHandler;
 
-    @Resource
+    @Resource(name = "ScheduledThreadPoolExecutor")
     private ThreadPoolExecutor threadPoolExecutor;
 
     /**
