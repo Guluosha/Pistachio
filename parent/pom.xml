@@ -194,6 +194,7 @@
 				<artifactId>message-producer</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -239,25 +240,87 @@
 			<version>1.9.1</version>
 		</dependency>
 
-		<!-- 项目模块 -->
+		<!-- 测试框架依赖（集中测试框架都写上，用哪个随便） -->
 		<dependency>
-			<groupId>org.pistachio</groupId>
-			<artifactId>common-utilities</artifactId>
-			<version>1.0.0</version>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>4.0.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock</artifactId>
+			<version>1.6.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jmockit</groupId>
+			<artifactId>jmockit</artifactId>
+			<version>1.46</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
+	<!-- 构建定义 -->
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${compiler.version}</version>
+				<version>3.7.0</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<encoding>utf-8</encoding>
+					<verbose>true</verbose>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.1</version>
+				<configuration>
+					<detail>true</detail>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M3</version>
 			</plugin>
 		</plugins>
 	</build>
+
+	<!-- 远程仓库 -->
+	<repositories>
+		<repository>
+			<id>aliyunmaven</id>
+			<name>阿里公共仓库</name>
+			<url>https://maven.aliyun.com/repository/public</url>
+			<layout>default</layout>
+			<releases>
+				<updatePolicy>always</updatePolicy>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<!-- 项目部署配置（远程仓库） -->
+	<distributionManagement>
+
+	</distributionManagement>
+
+	<!-- 配置文件 -->
+	<profiles>
+
+	</profiles>
 </project>

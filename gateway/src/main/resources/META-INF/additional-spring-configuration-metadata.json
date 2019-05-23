@@ -1,0 +1,9 @@
+{
+  "properties": [
+	{
+	  "name": "filter.url",
+	  "type": "java.lang.String",
+	  "description": "Description for filter.url."
+	}
+  ]
+}

@@ -1,8 +1,13 @@
 package org.pistachio.gateway.config;
 
 import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.context.annotation.Configuration;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -15,6 +20,21 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ZuulConfiguration extends ZuulFilter {
+
+    /**
+     * 过滤器要处理的url
+     */
+    @Value(value = "${filter.normal.url}")
+    private String filterUrl;
+
+    @Value(value = "${filter.auth.url}")
+    private String filterAuthUrl;
+
+    /**
+     * 分隔符
+     */
+    private static final String SEPARATOR = ";";
+
     /**
      * to classify a filter by type. Standard types in Zuul are "pre" for pre-routing filtering,
      * "route" for routing to an origin, "post" for post-routing filters, "error" for error handling.
@@ -25,7 +45,7 @@ public class ZuulConfiguration extends ZuulFilter {
      */
     @Override
     public String filterType() {
-        return null;
+        return FilterConstants.PRE_TYPE;
     }
 
     /**
@@ -46,7 +66,19 @@ public class ZuulConfiguration extends ZuulFilter {
      */
     @Override
     public boolean shouldFilter() {
-        return false;
+        RequestContext currentContext = RequestContext.getCurrentContext();
+        HttpServletRequest currentHttpServletRequest = currentContext.getRequest();
+        String[] splitUrls = filterUrl.split(SEPARATOR);
+        for (String splitUrl : splitUrls) {
+            if (currentHttpServletRequest.getRequestURL().toString().contains(splitUrl)){
+                return false;
+            }
+        }
+        String[] splitAuthUrls = filterAuthUrl.split(SEPARATOR);
+        for (String splitAuthUrl : splitAuthUrls) {
+            return !currentHttpServletRequest.getRequestURL().toString().contains(splitAuthUrl);
+        }
+        return true;
     }
 
     /**

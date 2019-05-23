@@ -16,5 +16,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-zuul</artifactId>
 		</dependency>
+		<!-- 工具模块 -->
+		<dependency>
+			<groupId>org.pistachio</groupId>
+			<artifactId>common-utilities</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>
