@@ -197,6 +197,7 @@
 				<artifactId>message-producer</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -242,6 +243,31 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.9.1</version>
 		</dependency>
+
+		<!-- 测试框架依赖（集中测试框架都写上，用哪个随便） -->
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>4.0.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock</artifactId>
+			<version>1.6.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jmockit</groupId>
+			<artifactId>jmockit</artifactId>
+			<version>1.46</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<!-- 构建定义 -->
@@ -274,7 +300,7 @@
 		</plugins>
 	</build>
 
-	<!-- 项目指定仓库 -->
+	<!-- 远程仓库 -->
 	<repositories>
 		<repository>
 			<id>aliyunmaven</id>
@@ -292,33 +318,13 @@
 		</repository>
 	</repositories>
 
-	<!-- 项目部署配置，上传地址 -->
+	<!-- 项目部署配置（远程仓库） -->
 	<distributionManagement>
-		<repository>
-			<id>Local-Repository</id>
-			<name>本地仓库（不通用，依据自己的仓库地址填写）</name>
-			<url>D:\MavenRepository</url>
-			<layout>default</layout>
-		</repository>
+
 	</distributionManagement>
 
+	<!-- 配置文件 -->
 	<profiles>
-		<profile>
-			<id>local-repository</id>
-			<repositories>
-				<repository>
-					<id>local-repository</id>
-					<name>本地仓库</name>
-					<layout>default</layout>
-					<url>D:\MavenRepository</url>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-				</repository>
-			</repositories>
-		</profile>
+
 	</profiles>
 </project>
