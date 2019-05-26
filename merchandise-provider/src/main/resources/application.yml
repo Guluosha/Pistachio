@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: merchandise
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-wz914f1tfy2x2191ndo.mysql.rds.aliyuncs.com:3306/pistachio
+    username: root
+    password: yn%@1131$ok
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: 数据库连接池--Hikari
+      connection-timeout: 5000
+      login-timeout: 5000
+      validation-timeout: 10000
+      auto-commit: true
+server:
+  address: localhost
+  port: 65535
+  server-header: brand
+  http2:
+    enabled: true

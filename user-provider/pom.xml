@@ -12,9 +12,5 @@
 	<artifactId>user-provider</artifactId>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter</artifactId>
-		</dependency>
 	</dependencies>
 </project>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- DTD：Document Type Definition -->
+<!-- <!DOCTYPE 根节点名 SYSTEM/PUBLIC（本地位置/网络位置） 文件路径> -->
+<!DOCTYPE mapper SYSTEM "mybatis-3-mapper.dtd">
+<mapper>
+
+</mapper>
