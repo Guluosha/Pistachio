@@ -17,5 +17,3 @@ server:
   address: localhost
   port: 65535
   server-header: brand
-  http2:
-    enabled: true

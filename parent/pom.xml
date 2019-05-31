@@ -22,6 +22,7 @@
 		<spring-boot-starter-websocket.version>2.1.5.RELEASE</spring-boot-starter-websocket.version>
 		<compiler.version>3.7.0</compiler.version>
 		<hikariCP.version>3.2.0</hikariCP.version>
+		<druid.version>1.1.2</druid.version>
 		<mysql-connector-java.version>8.0.16</mysql-connector-java.version>
 		<mybatis-spring.version>1.3.2</mybatis-spring.version>
 		<lombok.version>1.18.2</lombok.version>
@@ -170,49 +171,23 @@
 				<!--<version>${spring-cloud-starter-serial.version}</version>-->
 			</dependency>
 
-			<!-- 数据库依赖 -->
+			<!-- mysql驱动 -->
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql-connector-java.version}</version>
 			</dependency>
+
+			<!-- 数据库连接池 -->
 			<dependency>
 				<groupId>com.zaxxer</groupId>
 				<artifactId>HikariCP</artifactId>
 				<version>${hikariCP.version}</version>
 			</dependency>
-
-			<!-- ORM依赖 -->
 			<dependency>
-				<groupId>org.hibernate.common</groupId>
-				<artifactId>hibernate-commons-annotations</artifactId>
-				<version>5.0.4.Final</version>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-core</artifactId>
-				<version>5.3.3.Final</version>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-entitymanager</artifactId>
-				<version>5.2.10.Final</version>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-ehcache</artifactId>
-				<version>5.0.12.Final</version>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate.javax.persistence</groupId>
-				<artifactId>hibernate-jpa-2.1-api</artifactId>
-				<version>1.0.2.Final</version>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-validator-parent</artifactId>
-				<version>5.4.1.Final</version>
-				<scope>import</scope>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid-spring-boot-starter</artifactId>
+				<version>${druid.version}</version>
 			</dependency>
 
 			<!-- 消息队列中间件 -->
@@ -253,7 +228,7 @@
 				<artifactId>spring-cloud-dependencies</artifactId>
 				<version>Greenwich.M3</version>
 				<type>pom</type>
-				<scope>import</scope>
+				<scope>provided</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -283,7 +258,7 @@
 			<artifactId>spring-cloud-dependencies</artifactId>
 			<version>Finchley.RELEASE</version>
 			<type>pom</type>
-			<scope>import</scope>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Lombok -->
@@ -357,6 +332,7 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<encoding>utf-8</encoding>
+					<compilerVersion>1.8</compilerVersion>
 					<verbose>true</verbose>
 					<optimize>true</optimize>
 					<showWarnings>true</showWarnings>
