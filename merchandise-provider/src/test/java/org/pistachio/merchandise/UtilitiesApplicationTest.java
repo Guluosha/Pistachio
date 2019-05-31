@@ -1,13 +1,13 @@
-package org.pistachio.utilities;
+package org.pistachio.merchandise;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.pistachio.utilities.context.DefaultApplicationContext;
 import org.pistachio.utilities.event.concrete.MerchandiseAuditEvent;
+import org.pistachio.utilities.eventsource.MerchandiseAuditEventSource;
 import org.pistachio.utilities.listener.interfaces.BusinessEventListener;
 import org.pistachio.utilities.publisher.DefaultBusinessEventPublisher;
-import org.pistachio.utilities.eventsource.MerchandiseAuditEventSource;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
