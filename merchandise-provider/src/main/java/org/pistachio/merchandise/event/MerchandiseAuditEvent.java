@@ -1,7 +1,7 @@
-package org.pistachio.utilities.event.concrete;
+package org.pistachio.merchandise.event;
 
-import org.pistachio.utilities.event.inherits.AbstractMerchandiseEvent;
-import org.pistachio.utilities.eventsource.base.AbstractBusinessEventSource;
+import org.pistachio.utilities.event.AbstractMerchandiseEvent;
+import org.pistachio.utilities.event.base.AbstractBusinessEventSource;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司

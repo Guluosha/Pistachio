@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.pistachio.utilities.eventsource.base.AbstractBusinessEventSource;
+import org.pistachio.utilities.event.base.AbstractBusinessEventSource;
 import org.springframework.stereotype.Component;
 
 /**

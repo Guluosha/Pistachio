@@ -1,7 +1,5 @@
 package org.pistachio.utilities.event.base;
 
-import org.pistachio.utilities.eventsource.base.AbstractBusinessEventSource;
-
 import java.util.EventObject;
 
 /**

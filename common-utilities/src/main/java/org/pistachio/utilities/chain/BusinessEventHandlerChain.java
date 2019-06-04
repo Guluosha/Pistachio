@@ -1,7 +1,7 @@
 package org.pistachio.utilities.chain;
 
 
-import org.pistachio.utilities.listener.interfaces.BusinessEventListener;
+import org.pistachio.utilities.listener.BusinessEventListener;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司

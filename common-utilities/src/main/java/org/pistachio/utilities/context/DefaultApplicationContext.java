@@ -1,7 +1,7 @@
 package org.pistachio.utilities.context;
 
 import lombok.extern.slf4j.Slf4j;
-import org.pistachio.utilities.listener.interfaces.BusinessEventListener;
+import org.pistachio.utilities.listener.BusinessEventListener;
 import org.pistachio.utilities.publisher.DefaultBusinessEventPublisher;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -45,15 +45,16 @@ public class DefaultApplicationContext {
         return new CommonThreadFactory();
     }
 
-    @Bean
+    @Bean(name = "DefaultBusinessEventPublisher")
     @Scope(scopeName = "singleton")
     DefaultBusinessEventPublisher initDefaultBusinessPublisher() {
-        DefaultBusinessEventPublisher defaultBusinessEventPublisher = new DefaultBusinessEventPublisher();
-        defaultBusinessEventPublisher.setBusinessEventListenerSet(new HashSet<>());
-        defaultBusinessEventPublisher.setThreadPoolExecutor(initializeScheduledThreadPoolExecutor());
+        DefaultBusinessEventPublisher defaultBusinessEventPublisher = DefaultBusinessEventPublisher.builder()
+                .businessEventListenerSet(new HashSet<>())
+                .threadPoolExecutor(initializeScheduledThreadPoolExecutor())
+                .build();
         Map<String, BusinessEventListener> beansOfType = applicationContext.getBeansOfType(BusinessEventListener.class);
         for (String beanName : beansOfType.keySet()) {
-            defaultBusinessEventPublisher.addEventListener(applicationContext.getBean(beanName, BusinessEventListener.class));
+            defaultBusinessEventPublisher.registerEventListener(applicationContext.getBean(beanName, BusinessEventListener.class));
         }
         return defaultBusinessEventPublisher;
     }

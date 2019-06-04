@@ -1,10 +1,14 @@
 package org.pistachio.utilities.publisher;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.pistachio.utilities.event.base.AbstractBusinessEvent;
-import org.pistachio.utilities.listener.interfaces.BusinessEventListener;
-import org.pistachio.utilities.listener.interfaces.ExceptionHandler;
+import org.pistachio.utilities.listener.BusinessEventListener;
+import org.pistachio.utilities.listener.ExceptionHandler;
 import org.pistachio.utilities.publisher.base.BusinessEventPublisher;
 
 import java.util.Set;
@@ -18,6 +22,10 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @date 2019/5/5 ~ 上午 10:12
  */
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class DefaultBusinessEventPublisher implements BusinessEventPublisher {
 
     @Getter
@@ -38,7 +46,7 @@ public class DefaultBusinessEventPublisher implements BusinessEventPublisher {
      * @param listener 监听器
      */
     @Override
-    public void addEventListener(BusinessEventListener listener) {
+    public void registerEventListener(BusinessEventListener listener) {
         if (!businessEventListenerSet.contains(listener)) {
             businessEventListenerSet.add(listener);
         }
