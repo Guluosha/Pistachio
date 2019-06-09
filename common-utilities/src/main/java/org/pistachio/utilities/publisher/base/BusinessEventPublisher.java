@@ -1,6 +1,6 @@
 package org.pistachio.utilities.publisher.base;
 
-import org.pistachio.utilities.event.base.AbstractBusinessEvent;
+import org.pistachio.utilities.event.AbstractBusinessEvent;
 import org.pistachio.utilities.listener.BusinessEventListener;
 
 /**

@@ -16,7 +16,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  */
 
 @Slf4j
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"org.pistachio.*.config"})
 public class MerchandiseApplication {
 
     public static void main(String[] args) {

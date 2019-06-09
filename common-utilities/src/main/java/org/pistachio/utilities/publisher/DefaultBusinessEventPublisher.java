@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.pistachio.utilities.event.base.AbstractBusinessEvent;
+import org.pistachio.utilities.event.AbstractBusinessEvent;
 import org.pistachio.utilities.listener.BusinessEventListener;
 import org.pistachio.utilities.listener.ExceptionHandler;
 import org.pistachio.utilities.publisher.base.BusinessEventPublisher;

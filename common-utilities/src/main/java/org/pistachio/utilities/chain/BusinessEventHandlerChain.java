@@ -13,8 +13,20 @@ import org.pistachio.utilities.listener.BusinessEventListener;
 
 public interface BusinessEventHandlerChain {
 
+    /**
+     * 追加业务事件监听器
+     *
+     * @param businessEventListener 业务事件监听器
+     * @return BusinessEventHandlerChain 监听器链
+     */
     BusinessEventHandlerChain append(BusinessEventListener businessEventListener);
 
+    /**
+     * 移除业务事件监听器
+     *
+     * @param businessEventListener 业务事件监听器
+     * @return BusinessEventHandlerChain 监听器链
+     */
     BusinessEventHandlerChain remove(BusinessEventListener businessEventListener);
 
 }

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 
 /**
@@ -17,8 +18,8 @@ import org.springframework.context.annotation.PropertySource;
 @Slf4j
 @Configuration
 @ComponentScan(basePackages = {"org.pistachio.merchandise"})
-@MapperScan(basePackages = {"org.pistachio.**"})
+@MapperScan(basePackages = {"org.pistachio.*.persistence"})
 @PropertySource(value = {"classpath:application.yml"}, ignoreResourceNotFound = true, encoding = "UTF-8")
-//@EnableAspectJAutoProxy(proxyTargetClass = true)
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class DefaultApplicationContext {
 }

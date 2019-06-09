@@ -1,4 +1,4 @@
-package org.pistachio.utilities.event.base;
+package org.pistachio.utilities.event;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司

@@ -1,7 +1,7 @@
 package org.pistachio.merchandise.event;
 
-import org.pistachio.utilities.event.AbstractMerchandiseEvent;
-import org.pistachio.utilities.event.base.AbstractBusinessEventSource;
+import org.pistachio.utilities.event.AbstractBusinessEvent;
+import org.pistachio.utilities.event.AbstractBusinessEventSource;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -11,7 +11,7 @@ import org.pistachio.utilities.event.base.AbstractBusinessEventSource;
  * @date 2019/5/4 ~ 下午 6:16
  */
 
-public class MerchandiseAuditEvent extends AbstractMerchandiseEvent {
+public class MerchandiseAuditEvent extends AbstractBusinessEvent {
 
     /**
      * Constructs a prototypical Event.

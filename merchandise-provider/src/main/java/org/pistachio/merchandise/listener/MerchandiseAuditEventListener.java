@@ -3,7 +3,7 @@ package org.pistachio.merchandise.listener;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.pistachio.utilities.event.base.AbstractBusinessEvent;
+import org.pistachio.utilities.event.AbstractBusinessEvent;
 import org.pistachio.utilities.listener.BusinessEventListener;
 
 /**

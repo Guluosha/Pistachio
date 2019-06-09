@@ -1,6 +1,6 @@
 package org.pistachio.utilities.listener;
 
-import org.pistachio.utilities.event.base.AbstractBusinessEvent;
+import org.pistachio.utilities.event.AbstractBusinessEvent;
 
 import java.util.EventListener;
 
