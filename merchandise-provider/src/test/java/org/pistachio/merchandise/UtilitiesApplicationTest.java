@@ -54,18 +54,15 @@ public class UtilitiesApplicationTest {
     @Test
     public void displayBeanInformation() {
         System.out.println("\n\n#################\n");
-//        System.out.println(DefaultStaticApplicationContextAwareBean.getCurrentApplicationContext().getBean(MerchandiseAuditEventSource.class));
         System.out.println(defaultApplicationContextAwareBean.getCurrentApplicationContext().getBean(MerchandiseAuditEventSource.class));
         System.out.println("\n#################\n\n");
     }
 
     @Test
     public void getAllHandlerMappingBeans() {
-//        Map<String, HandlerMapping> stringHandlerMappingMap = BeanFactoryUtils.beansOfTypeIncludingAncestors(DefaultStaticApplicationContextAwareBean.getCurrentApplicationContext(), HandlerMapping.class, true, false);
         Map<String, HandlerMapping> stringHandlerMappingMap = BeanFactoryUtils.beansOfTypeIncludingAncestors(defaultApplicationContextAwareBean.getCurrentApplicationContext(), HandlerMapping.class, true, false);
         for (String handlerMappingName : stringHandlerMappingMap.keySet()) {
             System.out.println("\n#################\nHandlerMapping：");
-//            System.out.println(DefaultStaticApplicationContextAwareBean.getCurrentApplicationContext().getBean(handlerMappingName));
             System.out.print(defaultApplicationContextAwareBean.getCurrentApplicationContext().getBean(handlerMappingName));
         }
         System.out.println("\n#################\n");
@@ -120,7 +117,6 @@ public class UtilitiesApplicationTest {
     }
 
     private MerchandiseAuditEventSource buildBusinessEventSource(Long id, String name) {
-//        MerchandiseAuditEventSource auditEventSource = DefaultStaticApplicationContextAwareBean.getCurrentApplicationContext().getBean(MerchandiseAuditEventSource.class);
         MerchandiseAuditEventSource auditEventSource = defaultApplicationContextAwareBean.getCurrentApplicationContext().getBean(MerchandiseAuditEventSource.class);
         auditEventSource.setId(id);
         auditEventSource.setMerchandiseName(name);
