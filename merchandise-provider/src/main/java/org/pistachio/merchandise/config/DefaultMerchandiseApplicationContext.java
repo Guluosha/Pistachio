@@ -17,9 +17,9 @@ import org.springframework.context.annotation.PropertySource;
 
 @Slf4j
 @Configuration
-@ComponentScan(basePackages = {"org.pistachio.merchandise"})
+@ComponentScan(basePackages = {"org.pistachio.merchandise", "org.pistachio.utilities"})
 @MapperScan(basePackages = {"org.pistachio.*.persistence"})
 @PropertySource(value = {"classpath:application.yml"}, ignoreResourceNotFound = true, encoding = "UTF-8")
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-public class DefaultApplicationContext {
+public class DefaultMerchandiseApplicationContext {
 }

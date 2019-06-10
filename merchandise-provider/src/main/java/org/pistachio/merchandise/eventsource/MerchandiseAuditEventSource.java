@@ -1,4 +1,4 @@
-package org.pistachio.utilities.eventsource;
+package org.pistachio.merchandise.eventsource;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

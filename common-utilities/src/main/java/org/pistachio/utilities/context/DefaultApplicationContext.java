@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Configuration
-@ComponentScan(basePackages = {"org.pistachio.utilities.**"})
+@ComponentScan(basePackages = {"org.pistachio.utilities"})
 public class DefaultApplicationContext {
 
     @Resource

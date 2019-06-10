@@ -3,8 +3,11 @@ package org.pistachio.merchandise.listener;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.pistachio.merchandise.event.MerchandiseAuditEvent;
+import org.pistachio.merchandise.eventsource.MerchandiseAuditEventSource;
 import org.pistachio.utilities.event.AbstractBusinessEvent;
 import org.pistachio.utilities.listener.BusinessEventListener;
+import org.springframework.stereotype.Component;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -17,6 +20,7 @@ import org.pistachio.utilities.listener.BusinessEventListener;
 @Data
 @Builder
 @AllArgsConstructor
+@Component
 public class MerchandiseAuditEventListener implements BusinessEventListener {
 
     /**
@@ -26,7 +30,14 @@ public class MerchandiseAuditEventListener implements BusinessEventListener {
      */
     @Override
     public void handleBusinessEventWithoutReturn(AbstractBusinessEvent businessEvent) {
-
+        MerchandiseAuditEvent merchandiseAuditVoEvent = (MerchandiseAuditEvent) businessEvent;
+        Object merchandiseAuditVo = merchandiseAuditVoEvent.getSource();
+        if (merchandiseAuditVo instanceof MerchandiseAuditEventSource) {
+            System.out.println("\n\n##################################\n以下是商品审核时间监听器输出：\n");
+            System.out.println("id为：" + ((MerchandiseAuditEventSource) merchandiseAuditVo).getId());
+            System.out.println("商品名称为：" + ((MerchandiseAuditEventSource) merchandiseAuditVo).getMerchandiseName());
+            System.out.println("\n##################################\n\n");
+        }
     }
 
     /**

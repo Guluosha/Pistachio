@@ -1,7 +1,6 @@
 package org.pistachio.merchandise;
 
 import lombok.extern.slf4j.Slf4j;
-import org.pistachio.utilities.ApplicationContextHolder;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -21,6 +20,5 @@ public class MerchandiseApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext merchandiseApplicationContext = new SpringApplicationBuilder(MerchandiseApplication.class).web(WebApplicationType.SERVLET).build().run(args);
-        ApplicationContextHolder.getInstance().setApplicationContext(merchandiseApplicationContext);
     }
 }

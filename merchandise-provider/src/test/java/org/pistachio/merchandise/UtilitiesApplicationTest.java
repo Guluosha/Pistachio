@@ -4,15 +4,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.pistachio.merchandise.event.MerchandiseAuditEvent;
-import org.pistachio.utilities.ApplicationContextHolder;
+import org.pistachio.merchandise.eventsource.MerchandiseAuditEventSource;
+import org.pistachio.utilities.bean.DefaultApplicationContextAwareBean;
 import org.pistachio.utilities.listener.BusinessEventListener;
 import org.pistachio.utilities.publisher.DefaultBusinessEventPublisher;
 import org.springframework.beans.factory.BeanFactoryUtils;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.MethodParameter;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerMapping;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.annotation.Resource;
 import java.io.BufferedInputStream;
@@ -34,32 +38,52 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @RunWith(value = SpringRunner.class)
-//@ContextConfiguration(classes = {DefaultApplicationContext.class})
-@ContextConfiguration(classes = {MerchandiseApplication.class})
+@SpringBootTest(classes = {MerchandiseApplication.class})
 @TestPropertySource(locations = {"classpath:test/application.yml"})
 public class UtilitiesApplicationTest {
 
     @Resource
-    private ConfigurableApplicationContext applicationContext;
+    private DefaultApplicationContextAwareBean defaultApplicationContextAwareBean;
 
     @Resource
     private DefaultBusinessEventPublisher defaultBusinessEventPublisher;
 
+    @Resource
+    private RequestMappingHandlerMapping requestMappingHandlerMapping;
+
     @Test
     public void displayBeanInformation() {
         System.out.println("\n\n#################\n");
-        System.out.println(applicationContext.getBean(org.pistachio.utilities.eventsource.MerchandiseAuditEventSource.class));
+//        System.out.println(DefaultStaticApplicationContextAwareBean.getCurrentApplicationContext().getBean(MerchandiseAuditEventSource.class));
+        System.out.println(defaultApplicationContextAwareBean.getCurrentApplicationContext().getBean(MerchandiseAuditEventSource.class));
         System.out.println("\n#################\n\n");
     }
 
     @Test
     public void getAllHandlerMappingBeans() {
-        Map<String, HandlerMapping> stringHandlerMappingMap = BeanFactoryUtils.beansOfTypeIncludingAncestors(ApplicationContextHolder.getInstance().getApplicationContext(), HandlerMapping.class, true, false);
-        System.out.println("\n\n#################\nHandlerMapping：");
+//        Map<String, HandlerMapping> stringHandlerMappingMap = BeanFactoryUtils.beansOfTypeIncludingAncestors(DefaultStaticApplicationContextAwareBean.getCurrentApplicationContext(), HandlerMapping.class, true, false);
+        Map<String, HandlerMapping> stringHandlerMappingMap = BeanFactoryUtils.beansOfTypeIncludingAncestors(defaultApplicationContextAwareBean.getCurrentApplicationContext(), HandlerMapping.class, true, false);
         for (String handlerMappingName : stringHandlerMappingMap.keySet()) {
-            System.out.println(ApplicationContextHolder.getInstance().getApplicationContext().getBean(handlerMappingName));
-            System.out.println("\n\n#################");
+            System.out.println("\n#################\nHandlerMapping：");
+//            System.out.println(DefaultStaticApplicationContextAwareBean.getCurrentApplicationContext().getBean(handlerMappingName));
+            System.out.print(defaultApplicationContextAwareBean.getCurrentApplicationContext().getBean(handlerMappingName));
         }
+        System.out.println("\n#################\n");
+    }
+
+    @Test
+    public void getAllHandlerMappingBeansWithParameter() {
+        Map<RequestMappingInfo, HandlerMethod> handlerMethods = requestMappingHandlerMapping.getHandlerMethods();
+        System.out.println();
+        for (Map.Entry<RequestMappingInfo, HandlerMethod> requestMappingInfoHandlerMethodEntry : handlerMethods.entrySet()) {
+            System.out.println("#################\nHandlerMapping：");
+            System.out.println(requestMappingInfoHandlerMethodEntry.getKey());
+            System.out.println(requestMappingInfoHandlerMethodEntry.getValue());
+            for (MethodParameter methodParameter : requestMappingInfoHandlerMethodEntry.getValue().getMethodParameters()) {
+                System.out.println(methodParameter.getParameterType() + " ------ " + methodParameter.getParameter().getName());
+            }
+        }
+        System.out.println("#################\n");
     }
 
     @Test
@@ -87,7 +111,7 @@ public class UtilitiesApplicationTest {
             scanner = new Scanner(System.in);
             name = scanner.next();
             scanner.reset();
-            org.pistachio.utilities.eventsource.MerchandiseAuditEventSource merchandiseAuditEventSource = buildBusinessEventSource(Long.parseLong(id), name);
+            MerchandiseAuditEventSource merchandiseAuditEventSource = buildBusinessEventSource(Long.parseLong(id), name);
             MerchandiseAuditEvent merchandiseAuditEvent = new MerchandiseAuditEvent(merchandiseAuditEventSource);
             System.out.println("发布事件：" + merchandiseAuditEvent.getCurrentEventName());
             defaultBusinessEventPublisher.publishEvent(merchandiseAuditEvent);
@@ -95,8 +119,9 @@ public class UtilitiesApplicationTest {
         }
     }
 
-    private org.pistachio.utilities.eventsource.MerchandiseAuditEventSource buildBusinessEventSource(Long id, String name) {
-        org.pistachio.utilities.eventsource.MerchandiseAuditEventSource auditEventSource = applicationContext.getBean(org.pistachio.utilities.eventsource.MerchandiseAuditEventSource.class);
+    private MerchandiseAuditEventSource buildBusinessEventSource(Long id, String name) {
+//        MerchandiseAuditEventSource auditEventSource = DefaultStaticApplicationContextAwareBean.getCurrentApplicationContext().getBean(MerchandiseAuditEventSource.class);
+        MerchandiseAuditEventSource auditEventSource = defaultApplicationContextAwareBean.getCurrentApplicationContext().getBean(MerchandiseAuditEventSource.class);
         auditEventSource.setId(id);
         auditEventSource.setMerchandiseName(name);
         return auditEventSource;
