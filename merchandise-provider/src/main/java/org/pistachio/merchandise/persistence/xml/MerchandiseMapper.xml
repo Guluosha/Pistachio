@@ -2,6 +2,6 @@
 <!-- DTD：Document Type Definition -->
 <!-- <!DOCTYPE 根节点名 SYSTEM/PUBLIC（本地位置/网络位置） 文件路径> -->
 <!DOCTYPE mapper SYSTEM "mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="org.pistachio.merchandise.persistence.mapper.MerchandiseMapper">
 
 </mapper>

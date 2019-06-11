@@ -17,3 +17,12 @@ server:
   address: localhost
   port: 65535
   server-header: brand
+eureka:
+  instance:
+    instance-id: ${spring.application.name}
+    appname: ${spring.application.name}
+    hostname: pistachio
+    initial-status: up
+  client:
+    service-url:
+      defaultZone: http://${server.address}:1024/eureka

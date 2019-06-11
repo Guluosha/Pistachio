@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -19,6 +18,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class MerchandiseApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext merchandiseApplicationContext = new SpringApplicationBuilder(MerchandiseApplication.class).web(WebApplicationType.SERVLET).build().run(args);
+        new SpringApplicationBuilder(MerchandiseApplication.class).web(WebApplicationType.SERVLET).build().run(args);
     }
 }

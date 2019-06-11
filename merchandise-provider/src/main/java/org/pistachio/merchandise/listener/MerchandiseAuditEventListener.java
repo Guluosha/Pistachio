@@ -33,7 +33,7 @@ public class MerchandiseAuditEventListener implements BusinessEventListener {
         MerchandiseAuditEvent merchandiseAuditVoEvent = (MerchandiseAuditEvent) businessEvent;
         Object merchandiseAuditVo = merchandiseAuditVoEvent.getSource();
         if (merchandiseAuditVo instanceof MerchandiseAuditEventSource) {
-            System.out.println("\n\n##################################\n以下是商品审核时间监听器输出：\n");
+            System.out.println("\n\n##################################\n以下是商品审核事件监听器输出：\n");
             System.out.println("id为：" + ((MerchandiseAuditEventSource) merchandiseAuditVo).getId());
             System.out.println("商品名称为：" + ((MerchandiseAuditEventSource) merchandiseAuditVo).getMerchandiseName());
             System.out.println("\n##################################\n\n");
