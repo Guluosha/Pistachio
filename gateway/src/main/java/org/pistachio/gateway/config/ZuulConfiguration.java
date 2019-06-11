@@ -3,7 +3,6 @@ package org.pistachio.gateway.config;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,10 +23,10 @@ public class ZuulConfiguration extends ZuulFilter {
     /**
      * 过滤器要处理的url
      */
-    @Value(value = "${filter.normal.url}")
+//    @Value(value = "${filter.normal.url}")
     private String filterUrl;
 
-    @Value(value = "${filter.auth.url}")
+//    @Value(value = "${filter.auth.url}")
     private String filterAuthUrl;
 
     /**
