@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-public class People {
+public class PeopleForTest {
 
 	private String name;
 

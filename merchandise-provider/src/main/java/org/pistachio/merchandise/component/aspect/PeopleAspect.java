@@ -21,11 +21,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class PeopleAspect {
 
-	@Pointcut(value = "execution(* org.pistachio.merchandise.service.PeopleExecutor.setupPeopleName(..)) && args(name)")
+	@Pointcut(value = "execution(* org.pistachio.merchandise.service.PeopleExecutorForTest.setupPeopleName(..)) && args(name)")
 	private void setupPeopleName(String name) {
 	}
 
-	@Pointcut(value = "execution(* org.pistachio.merchandise.service.PeopleExecutor.setupPeopleGender(..)) && args(gender)")
+	@Pointcut(value = "execution(* org.pistachio.merchandise.service.PeopleExecutorForTest.setupPeopleGender(..)) && args(gender)")
 	private void setupPeopleGender(String gender) {
 	}
 

@@ -1,7 +1,7 @@
 package org.pistachio.merchandise.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.pistachio.merchandise.bean.People;
+import org.pistachio.merchandise.bean.PeopleForTest;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -16,23 +16,23 @@ import javax.annotation.Resource;
 
 @Slf4j
 @Component
-public class PeopleExecutor {
+public class PeopleExecutorForTest {
 
 	@Resource
-	private People people;
+	private PeopleForTest peopleForTest;
 
 	public String setupPeopleName(String name) {
-		people.setName(name);
+		peopleForTest.setName(name);
 		System.out.println("####################");
-		System.out.println(people.getName());
+		System.out.println(peopleForTest.getName());
 		System.out.println("####################");
 		return name;
 	}
 
 	public String setupPeopleGender(String gender) {
-		people.setGender(gender);
+		peopleForTest.setGender(gender);
 		System.out.println("####################");
-		System.out.println(people.getGender());
+		System.out.println(peopleForTest.getGender());
 		System.out.println("####################");
 		return gender;
 	}
