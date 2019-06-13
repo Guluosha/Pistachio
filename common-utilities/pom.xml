@@ -36,8 +36,9 @@
 			<resource>
 				<directory>src/main/resources</directory>
 				<includes>
-					<include>**/*.properties</include>
 					<include>**/*.yml</include>
+					<include>**/*.yaml</include>
+					<include>**/*.properties</include>
 					<include>**/*.xml</include>
 				</includes>
 			</resource>
@@ -57,8 +58,9 @@
 						<configuration>
 							<includes>
 								<include>*.yml</include>
-								<include>*.xml</include>
+								<include>*.yaml</include>
 								<include>*.properties</include>
+								<include>*.xml</include>
 							</includes>
 						</configuration>
 					</execution>
@@ -75,10 +77,20 @@
 				<version>3.1.0</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
-					<resources>
-						<resource>${project.basedir}/src/main/resources</resource>
-						<!--<directory>${project.basedir}/src/main/resources</directory>-->
-					</resources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<detail>true</detail>
+					<includes>
+						<include>*.yml</include>
+						<include>*.yaml</include>
+						<include>*.properties</include>
+						<include>*.xml</include>
+					</includes>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -92,19 +104,6 @@
 					<version>${project.version}</version>
 					<packaging>${project.packaging}</packaging>
 					<localRepositoryPath>D:\MavenRepository</localRepositoryPath>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.1.0</version>
-				<configuration>
-					<detail>true</detail>
-					<includes>
-						<include>*.yml</include>
-						<include>*.properties</include>
-						<include>*.xml</include>
-					</includes>
 				</configuration>
 			</plugin>
 		</plugins>

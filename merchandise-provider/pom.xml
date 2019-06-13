@@ -46,59 +46,16 @@
 			<groupId>org.pistachio</groupId>
 			<artifactId>common-utilities</artifactId>
 			<version>1.0.0</version>
+			<scope>compile</scope>
 		</dependency>
 
-		<!-- 消息中间件 -->
+		<!-- 项目依赖 -->
 		<dependency>
 			<groupId>org.pistachio</groupId>
 			<artifactId>message-producer</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
-
-	<!--<repositories>
-		<repository>
-			<id>central</id>
-			<name>阿里公共仓库</name>
-			<url>https://maven.aliyun.com/repository/central</url>
-			<layout>default</layout>
-			<releases>
-				<updatePolicy>always</updatePolicy>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>jcenter</id>
-			<name>jcenter库</name>
-			<url>https://maven.aliyun.com/repository/jcenter</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>Central</id>
-			<name>中央仓库</name>
-			<url>http://central.maven.org/maven2/</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</repository>
-	</repositories>-->
 
 	<!-- 项目部署配置（远程仓库） -->
 	<!--<distributionManagement>
