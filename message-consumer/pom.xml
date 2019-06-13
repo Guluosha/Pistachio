@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>org.pistachio</groupId>
 			<artifactId>common-utilities</artifactId>
-			<version>${project.version}</version>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 </project>

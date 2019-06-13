@@ -46,7 +46,6 @@
 			<groupId>org.pistachio</groupId>
 			<artifactId>common-utilities</artifactId>
 			<version>1.0.0</version>
-			<scope>compile</scope>
 		</dependency>
 
 		<!-- 项目依赖 -->

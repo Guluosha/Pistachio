@@ -1,5 +1,6 @@
 package org.pistachio.producer;
 
+import org.pistachio.utilities.enums.MessageChannelNameEnum;
 import org.springframework.cloud.stream.messaging.Source;
 
 /**
@@ -12,9 +13,9 @@ import org.springframework.cloud.stream.messaging.Source;
 
 public interface OutputMessageChannel extends Source {
 
-    String LOGISTIC_MESSAGE_OUTPUT_CHANNEL = "Logistic_Message_Output_Channel";
+    String LOGISTIC_MESSAGE_OUTPUT_CHANNEL = MessageChannelNameEnum.LogisticMessageOutputChannel.getName();
 
-    String MERCHANDISE_OUTPUT_CHANNEL = "MERCHANDISE_OUTPUT_CHANNEL";
+    String MERCHANDISE_OUTPUT_CHANNEL = MessageChannelNameEnum.MerchandiseOutputChannel.getName();
 
-    String ORDER_MESSAGE_OUTPUT_CHANNEL = "ORDER_MESSAGE_OUTPUT_CHANNEL";
+    String ORDER_MESSAGE_OUTPUT_CHANNEL = MessageChannelNameEnum.OrderMessageOutputChannel.getName();
 }

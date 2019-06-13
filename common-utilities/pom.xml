@@ -86,10 +86,11 @@
 				<configuration>
 					<detail>true</detail>
 					<includes>
-						<include>*.yml</include>
-						<include>*.yaml</include>
-						<include>*.properties</include>
-						<include>*.xml</include>
+						<include>**/*.yml</include>
+						<include>**/*.yaml</include>
+						<include>**/*.properties</include>
+						<include>**/*.xml</include>
+						<include>**/*.class</include>
 					</includes>
 				</configuration>
 			</plugin>
@@ -98,7 +99,7 @@
 				<artifactId>maven-install-plugin</artifactId>
 				<version>3.0.0-M1</version>
 				<configuration>
-					<file>${basedir}/target/${project.artifactId}-${project.version}.jar</file>
+					<file>${basedir}/target/${project.artifactId}-${project.version}.${project.packaging}</file>
 					<groupId>${project.groupId}</groupId>
 					<artifactId>${project.artifactId}</artifactId>
 					<version>${project.version}</version>

@@ -3,7 +3,7 @@ package org.pistachio.consumer.config;
 import lombok.extern.slf4j.Slf4j;
 import org.pistachio.consumer.properties.RabbitConnectionProperties;
 import org.pistachio.consumer.properties.RabbitInputChannelProperties;
-import org.pistachio.utilities.ApplicationContextHolder;
+import org.pistachio.utilities.bean.DefaultApplicationContextAwareBean;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -28,6 +28,9 @@ import javax.annotation.Resource;
 public class RabbitInputChannelConfiguration {
 
     @Resource
+    private DefaultApplicationContextAwareBean defaultApplicationContextAwareBean;
+
+    @Resource
     private RabbitInputChannelProperties rabbitInputChannelProperties;
 
     @Resource
@@ -41,7 +44,7 @@ public class RabbitInputChannelConfiguration {
         cachingConnectionFactory.setUsername(rabbitConnectionProperties.getUserName());
         cachingConnectionFactory.setPassword(rabbitConnectionProperties.getPassword());
         cachingConnectionFactory.setHost(rabbitConnectionProperties.getHost());
-        cachingConnectionFactory.setApplicationContext(ApplicationContextHolder.getInstance().getApplicationContext());
+        cachingConnectionFactory.setApplicationContext(defaultApplicationContextAwareBean.getCurrentApplicationContext());
         return cachingConnectionFactory;
     }
 
