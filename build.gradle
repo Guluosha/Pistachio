@@ -1,0 +1,5 @@
+tasks {
+	task("buildingPrompt") {
+		println "准备开始构建项目"
+	}
+}
