@@ -19,6 +19,7 @@
 		<module>merchandise-api</module>
 		<module>merchant-api</module>
 		<module>order-api</module>
+		<module>pay-api</module>
 		<module>activity-api</module>
 		<module>points-api</module>
 		<module>employee-api</module>
@@ -33,6 +34,7 @@
 		<module>merchandise-provider</module>
 		<module>merchant-provider</module>
 		<module>order-provider</module>
+		<module>pay-provider</module>
 		<module>activity-provider</module>
 		<module>points-provider</module>
 		<module>employee-provider</module>
