@@ -6,6 +6,7 @@ import java.util.Random;
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
  * <br/><b/>
+ * 冒泡排序（问题规模为n，需要比较的次数为n，时间复杂度为O(n^2)）
  *
  * @author SingleCycle(QQ ： 单曲循环)
  * @date 2019/6/13 ~ 下午 12:02
