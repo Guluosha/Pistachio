@@ -40,7 +40,7 @@ public class DefaultApplicationContext {
         return new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), buildThreadFactory(), buildRejectedExecutionHandler());
     }
 
-    @Bean(name = {"ThreadFactory"})
+    @Bean(name = {"CommonThreadFactory"})
     ThreadFactory buildThreadFactory() {
         return new CommonThreadFactory();
     }
