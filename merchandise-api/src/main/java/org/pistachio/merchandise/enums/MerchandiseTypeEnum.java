@@ -1,4 +1,4 @@
-package org.pistachio.utilities.enums.merchandise;
+package org.pistachio.merchandise;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
