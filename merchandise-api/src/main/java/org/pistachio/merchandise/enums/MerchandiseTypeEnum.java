@@ -1,4 +1,4 @@
-package org.pistachio.merchandise;
+package org.pistachio.merchandise.enums;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -10,5 +10,13 @@ package org.pistachio.merchandise;
  */
 
 public enum MerchandiseTypeEnum {
+    ;
+
+    private Integer value;
+
+    MerchandiseTypeEnum(Integer value) {
+        this.value = value;
+    }
+
 
 }
