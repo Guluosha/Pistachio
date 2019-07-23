@@ -1,6 +1,5 @@
 package org.pistachio.merchandise.bean;
 
-import lombok.Data;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
  * @date 2018/12/18 ~ 下午 5:22
  */
 
-@Data
 @Component
 public class People {
 

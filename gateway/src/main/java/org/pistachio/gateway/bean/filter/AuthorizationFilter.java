@@ -1,39 +1,23 @@
-package org.pistachio.gateway.config;
+package org.pistachio.gateway.bean.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_TYPE;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
  * <br/><b/>
- * Zuul网关配置
+ * 授权过滤器
  *
  * @author SingleCycle(QQ ： 单曲循环)
- * @date 2019/1/5 ~ 下午 8:15
+ * @date 2019/7/13 ~ 上午 1:13
  */
 
-@Configuration
-public class ZuulConfiguration extends ZuulFilter {
-
-    /**
-     * 过滤器要处理的url
-     */
-    @Value(value = "${filter.normal.url}")
-    private String filterUrl;
-
-    @Value(value = "${filter.auth.url}")
-    private String filterAuthUrl;
-
-    /**
-     * 分隔符
-     */
-    private static final String SEPARATOR = ";";
+@Component
+public class AuthorizationFilter extends ZuulFilter {
 
     /**
      * to classify a filter by type. Standard types in Zuul are "pre" for pre-routing filtering,
@@ -45,7 +29,7 @@ public class ZuulConfiguration extends ZuulFilter {
      */
     @Override
     public String filterType() {
-        return FilterConstants.PRE_TYPE;
+        return PRE_TYPE;
     }
 
     /**
@@ -56,7 +40,7 @@ public class ZuulConfiguration extends ZuulFilter {
      */
     @Override
     public int filterOrder() {
-        return 0;
+        return 1;
     }
 
     /**
@@ -66,18 +50,6 @@ public class ZuulConfiguration extends ZuulFilter {
      */
     @Override
     public boolean shouldFilter() {
-        RequestContext currentContext = RequestContext.getCurrentContext();
-        HttpServletRequest currentHttpServletRequest = currentContext.getRequest();
-        String[] splitUrls = filterUrl.split(SEPARATOR);
-        for (String splitUrl : splitUrls) {
-            if (currentHttpServletRequest.getRequestURL().toString().contains(splitUrl)){
-                return false;
-            }
-        }
-        String[] splitAuthUrls = filterAuthUrl.split(SEPARATOR);
-        for (String splitAuthUrl : splitAuthUrls) {
-            return !currentHttpServletRequest.getRequestURL().toString().contains(splitAuthUrl);
-        }
         return true;
     }
 
@@ -89,6 +61,8 @@ public class ZuulConfiguration extends ZuulFilter {
      */
     @Override
     public Object run() throws ZuulException {
+        RequestContext currentContext = RequestContext.getCurrentContext();
+
         return null;
     }
 }

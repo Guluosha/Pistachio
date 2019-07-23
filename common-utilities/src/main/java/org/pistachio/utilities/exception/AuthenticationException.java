@@ -1,17 +1,18 @@
 package org.pistachio.utilities.exception;
 
-import com.netflix.zuul.exception.ZuulException;
-
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
  * <br/><b/>
- * 自定义异常消息包装类
  *
  * @author SingleCycle(QQ ： 单曲循环)
- * @date 2019/3/23 ~ 上午 11:52
+ * @date 2019/7/13 ~ 上午 1:48
  */
 
-public abstract class AbstractExceptionWrapper extends ZuulException {
+public class AuthenticationException extends AbstractException {
+
+    private static final String exceptionDescription = "authentication_failed";
+
+    private static final Integer statusCode = 401;
 
     /**
      * Source Throwable, message, status code and info about the cause
@@ -21,7 +22,7 @@ public abstract class AbstractExceptionWrapper extends ZuulException {
      * @param nStatusCode 异常码
      * @param errorCause  异常原因
      */
-    public AbstractExceptionWrapper(Throwable throwable, String sMessage, int nStatusCode, String errorCause) {
+    public AuthenticationException(Throwable throwable, String sMessage, int nStatusCode, String errorCause) {
         super(throwable, sMessage, nStatusCode, errorCause);
     }
 
@@ -32,7 +33,7 @@ public abstract class AbstractExceptionWrapper extends ZuulException {
      * @param nStatusCode 异常码
      * @param errorCause  异常原因
      */
-    public AbstractExceptionWrapper(String sMessage, int nStatusCode, String errorCause) {
+    public AuthenticationException(String sMessage, int nStatusCode, String errorCause) {
         super(sMessage, nStatusCode, errorCause);
     }
 
@@ -43,7 +44,7 @@ public abstract class AbstractExceptionWrapper extends ZuulException {
      * @param nStatusCode 异常码
      * @param errorCause  异常原因
      */
-    public AbstractExceptionWrapper(Throwable throwable, int nStatusCode, String errorCause) {
+    public AuthenticationException(Throwable throwable, int nStatusCode, String errorCause) {
         super(throwable, nStatusCode, errorCause);
     }
 }

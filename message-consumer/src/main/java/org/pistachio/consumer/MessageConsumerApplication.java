@@ -1,6 +1,5 @@
 package org.pistachio.consumer;
 
-import org.pistachio.utilities.ApplicationContextHolder;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -24,6 +23,5 @@ public class MessageConsumerApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = new SpringApplicationBuilder(MessageConsumerApplication.class).web(WebApplicationType.NONE).build().run(args);
-        ApplicationContextHolder.getInstance().setApplicationContext(applicationContext);
     }
 }
