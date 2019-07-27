@@ -44,7 +44,7 @@ public class AuthenticationFilter extends ZuulFilter {
      */
     @Override
     public int filterOrder() {
-        return 0;
+        return 2;
     }
 
     /**
@@ -69,8 +69,8 @@ public class AuthenticationFilter extends ZuulFilter {
         HttpServletRequest currentContextRequest = currentContext.getRequest();
         String userToken = currentContextRequest.getHeader(CustomRequestHeaderConstants.USER_TOKEN);
         String macAddress = currentContextRequest.getHeader(CustomRequestHeaderConstants.MAC_ADDRESS);
-        String IMEINumber = currentContextRequest.getHeader(CustomRequestHeaderConstants.IMEI_NUMBER);
-        if (userToken == null || macAddress == null || IMEINumber == null) {
+        String internationalMobileEquipmentIdentity = currentContextRequest.getHeader(CustomRequestHeaderConstants.DEVICE_ID);
+        if (userToken == null || macAddress == null || internationalMobileEquipmentIdentity == null) {
             throw new BadRequestException("", 0, "");
         }
         return null;

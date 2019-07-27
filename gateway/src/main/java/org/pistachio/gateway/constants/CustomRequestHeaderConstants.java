@@ -15,6 +15,6 @@ public interface CustomRequestHeaderConstants {
 
     String MAC_ADDRESS = "MACAddress";
 
-    String IMEI_NUMBER = "IMEINumber";
+    String DEVICE_ID = "deviceId";
 
 }

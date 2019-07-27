@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: practice
+server:
+  address: localhost
+  port: 65535
+eureka:
+  instance:
+    appname: practice
+    instance-id: practice
+    ip-address: localhost
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

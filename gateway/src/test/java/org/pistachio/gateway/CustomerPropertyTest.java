@@ -1,10 +1,7 @@
 package org.pistachio.gateway;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.pistachio.gateway.bean.property.CustomerZuulFilterProperty;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 
 /**
@@ -19,13 +16,4 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration(classes = {GatewayApplication.class})
 public class CustomerPropertyTest {
 
-    //    @Resource
-    @MockBean
-    private CustomerZuulFilterProperty customerZuulFilterProperty;
-
-    @Test
-    public void displayProperty() {
-        System.out.println(customerZuulFilterProperty.getAuthFilterUrl());
-        System.out.println(customerZuulFilterProperty.getCertificationUrl());
-    }
 }
