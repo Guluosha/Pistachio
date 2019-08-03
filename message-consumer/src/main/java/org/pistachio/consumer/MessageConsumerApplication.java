@@ -3,7 +3,6 @@ package org.pistachio.consumer;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 
@@ -22,6 +21,6 @@ import org.springframework.context.annotation.PropertySource;
 public class MessageConsumerApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext applicationContext = new SpringApplicationBuilder(MessageConsumerApplication.class).web(WebApplicationType.NONE).build().run(args);
+        new SpringApplicationBuilder(MessageConsumerApplication.class).web(WebApplicationType.NONE).build().run(args);
     }
 }

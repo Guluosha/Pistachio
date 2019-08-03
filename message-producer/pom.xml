@@ -10,11 +10,34 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>message-producer</artifactId>
+	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.pistachio</groupId>
+			<artifactId>common-utilities</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<configuration>
+					<file>./target/${project.artifactId}-${project.version}.${project.packaging}</file>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>${project.artifactId}</artifactId>
+					<version>${project.version}</version>
+					<packaging>${project.packaging}</packaging>
+					<localRepositoryPath>D:\MavenRepository</localRepositoryPath>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

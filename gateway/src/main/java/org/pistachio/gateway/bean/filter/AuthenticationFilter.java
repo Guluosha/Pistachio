@@ -4,11 +4,13 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import org.pistachio.gateway.constants.CustomRequestHeaderConstants;
+import org.pistachio.utilities.enums.constants.SeparatorEnums;
 import org.pistachio.utilities.exception.BadRequestException;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.DEBUG_FILTER_ORDER;
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_TYPE;
 
 /**
@@ -22,6 +24,8 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
 
 @Component
 public class AuthenticationFilter extends ZuulFilter {
+
+    public static final Integer AUTHENTICATION_FILTER_ORDER = DEBUG_FILTER_ORDER + 1;
 
     /**
      * to classify a filter by type. Standard types in Zuul are "pre" for pre-routing filtering,
@@ -44,7 +48,7 @@ public class AuthenticationFilter extends ZuulFilter {
      */
     @Override
     public int filterOrder() {
-        return 2;
+        return AUTHENTICATION_FILTER_ORDER;
     }
 
     /**
@@ -54,6 +58,14 @@ public class AuthenticationFilter extends ZuulFilter {
      */
     @Override
     public boolean shouldFilter() {
+        RequestContext currentContext = RequestContext.getCurrentContext();
+        String requestUri = currentContext.getRequest().getRequestURI();
+        String[] splitStrings = requestUri.split(SeparatorEnums.URL_SEPARATOR.getString());
+        for (String splitString : splitStrings) {
+            if ("search".equalsIgnoreCase(splitString)) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -65,8 +77,7 @@ public class AuthenticationFilter extends ZuulFilter {
      */
     @Override
     public Object run() throws ZuulException {
-        RequestContext currentContext = RequestContext.getCurrentContext();
-        HttpServletRequest currentContextRequest = currentContext.getRequest();
+        HttpServletRequest currentContextRequest = RequestContext.getCurrentContext().getRequest();
         String userToken = currentContextRequest.getHeader(CustomRequestHeaderConstants.USER_TOKEN);
         String macAddress = currentContextRequest.getHeader(CustomRequestHeaderConstants.MAC_ADDRESS);
         String internationalMobileEquipmentIdentity = currentContextRequest.getHeader(CustomRequestHeaderConstants.DEVICE_ID);

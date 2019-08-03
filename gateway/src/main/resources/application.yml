@@ -7,9 +7,9 @@ server:
   server-header: brand
 eureka:
   instance:
-    instance-id: gateway-0
-    appname: gateway
-    hostname: pistachio
+    instance-id: ${spring.application.name}
+    appname: ${spring.application.name}
+#    hostname: pistachio
     ip-address: 127.0.0.1
     prefer-ip-address: true
     home-page-url: http://${server.address}:${server.port}/homePage

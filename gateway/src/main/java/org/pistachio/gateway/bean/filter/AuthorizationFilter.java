@@ -19,6 +19,8 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
 @Component
 public class AuthorizationFilter extends ZuulFilter {
 
+    private static final Integer AUTHORIZATION_FILTER_ORDER = AuthenticationFilter.AUTHENTICATION_FILTER_ORDER + 1;
+
     /**
      * to classify a filter by type. Standard types in Zuul are "pre" for pre-routing filtering,
      * "route" for routing to an origin, "post" for post-routing filters, "error" for error handling.
@@ -40,7 +42,7 @@ public class AuthorizationFilter extends ZuulFilter {
      */
     @Override
     public int filterOrder() {
-        return 3;
+        return AUTHORIZATION_FILTER_ORDER;
     }
 
     /**
