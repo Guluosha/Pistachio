@@ -3,14 +3,12 @@ package org.pistachio.utilities.context;
 import lombok.extern.slf4j.Slf4j;
 import org.pistachio.utilities.listener.interfaces.BusinessEventListener;
 import org.pistachio.utilities.publisher.DefaultBusinessEventPublisher;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.lang.Nullable;
 
-import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -29,11 +27,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Configuration
-@ComponentScan(basePackages = {"org.pistachio.utilities.**"})
+@ComponentScan(basePackages = {"org.pistachio.*.**"})
 public class DefaultApplicationContext {
-
-    @Resource
-    private ApplicationContext applicationContext;
 
     @Bean(name = {"ScheduledThreadPoolExecutor"})
     ScheduledThreadPoolExecutor initializeScheduledThreadPoolExecutor() {
@@ -51,9 +46,9 @@ public class DefaultApplicationContext {
         DefaultBusinessEventPublisher defaultBusinessEventPublisher = new DefaultBusinessEventPublisher();
         defaultBusinessEventPublisher.setBusinessEventListenerSet(new HashSet<>());
         defaultBusinessEventPublisher.setThreadPoolExecutor(initializeScheduledThreadPoolExecutor());
-        Map<String, BusinessEventListener> beansOfType = applicationContext.getBeansOfType(BusinessEventListener.class);
+        Map<String, BusinessEventListener> beansOfType = SpringApplicationContextHolder.getApplicationContext().getBeansOfType(BusinessEventListener.class);
         for (String beanName : beansOfType.keySet()) {
-            defaultBusinessEventPublisher.addEventListener(applicationContext.getBean(beanName, BusinessEventListener.class));
+            defaultBusinessEventPublisher.addEventListener(SpringApplicationContextHolder.getApplicationContext().getBean(beanName, BusinessEventListener.class));
         }
         return defaultBusinessEventPublisher;
     }
