@@ -1,6 +1,5 @@
 package org.pistachio.activity;
 
-import org.pistachio.utilities.ApplicationContextHolder;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -23,7 +22,6 @@ public class ActivityApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext applicationContext = new SpringApplicationBuilder(ActivityApplication.class).web(WebApplicationType.NONE).build().run(args);
-		ApplicationContextHolder.getInstance().setApplicationContext(applicationContext);
 		People bean = applicationContext.getBean(People.class);
 		System.out.println("##############################");
 		System.out.println(bean.getName());
