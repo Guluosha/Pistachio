@@ -4,6 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -15,7 +18,10 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  */
 
 @Slf4j
-@SpringBootApplication(scanBasePackages = {"org.pistachio"})
+@EnableZuulProxy
+@ComponentScan(basePackages = {"org.pistachio.*"}, lazyInit = true)
+@PropertySource(value = {"classpath*:*.yml"}, encoding = "utf-8", ignoreResourceNotFound = true)
+@SpringBootApplication
 public class GatewayApplication {
 
     public static void main(String[] args) {

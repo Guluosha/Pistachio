@@ -47,7 +47,6 @@
 		<module>message-producer</module>
 		<module>message-consumer</module>
 		<module>sensors-data</module>
-		<module>design-pattern</module>
 		<module>other-practice</module>
 	</modules>
 	<description>这都是要学的后台技术</description>

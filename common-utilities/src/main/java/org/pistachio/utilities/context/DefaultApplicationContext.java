@@ -4,14 +4,12 @@ import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.pistachio.utilities.listener.BusinessEventListener;
 import org.pistachio.utilities.publisher.DefaultBusinessEventPublisher;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.lang.Nullable;
 
-import javax.annotation.Resource;
 import java.util.Map;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
@@ -29,18 +27,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Configuration
-@ComponentScan(basePackages = {"org.pistachio.utilities"})
+@ComponentScan(basePackages = {"org.pistachio.*.**"})
 public class DefaultApplicationContext {
-
-    @Resource
-    private ApplicationContext applicationContext;
 
     @Bean(name = {"ScheduledThreadPoolExecutor"})
     ScheduledThreadPoolExecutor initializeScheduledThreadPoolExecutor() {
-        return new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors() << 2, buildThreadFactory(), buildRejectedExecutionHandler());
+        return new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), buildThreadFactory(), buildRejectedExecutionHandler());
     }
 
-    @Bean(name = {"CommonThreadFactory"})
+    @Bean(name = {"ThreadFactory"})
     ThreadFactory buildThreadFactory() {
         return new CommonThreadFactory();
     }
@@ -49,12 +44,12 @@ public class DefaultApplicationContext {
     @Scope(scopeName = "singleton")
     DefaultBusinessEventPublisher initDefaultBusinessPublisher() {
         DefaultBusinessEventPublisher defaultBusinessEventPublisher = DefaultBusinessEventPublisher.builder()
-                .businessEventListenerSet(Sets.newConcurrentHashSet())
+                .businessEventListenerSet(Sets.newHashSet())
                 .threadPoolExecutor(initializeScheduledThreadPoolExecutor())
                 .build();
-        Map<String, BusinessEventListener> beansOfType = applicationContext.getBeansOfType(BusinessEventListener.class);
+        Map<String, BusinessEventListener> beansOfType = SpringApplicationContextHolder.getApplicationContext().getBeansOfType(BusinessEventListener.class);
         for (String beanName : beansOfType.keySet()) {
-            defaultBusinessEventPublisher.registerEventListener(applicationContext.getBean(beanName, BusinessEventListener.class));
+            defaultBusinessEventPublisher.registerEventListener(SpringApplicationContextHolder.getBean(beanName, BusinessEventListener.class));
         }
         return defaultBusinessEventPublisher;
     }
