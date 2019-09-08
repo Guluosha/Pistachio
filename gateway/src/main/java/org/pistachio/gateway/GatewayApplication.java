@@ -1,12 +1,10 @@
 package org.pistachio.gateway;
 
 import lombok.extern.slf4j.Slf4j;
-import org.pistachio.utilities.ApplicationContextHolder;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 
@@ -26,8 +24,7 @@ import org.springframework.context.annotation.PropertySource;
 @SpringBootApplication
 public class GatewayApplication {
 
-	public static void main(String[] args) {
-		ConfigurableApplicationContext applicationContext = new SpringApplicationBuilder(GatewayApplication.class).web(WebApplicationType.SERVLET).build().run(args);
-		ApplicationContextHolder.getInstance().setApplicationContext(applicationContext);
-	}
+    public static void main(String[] args) {
+        new SpringApplicationBuilder(GatewayApplication.class).web(WebApplicationType.SERVLET).build().run(args);
+    }
 }
