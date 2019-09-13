@@ -1,9 +1,3 @@
-tasks {
-	task("buildingPrompt") {
-		println "准备开始构建项目"
-	}
-}
-
 allprojects {
 	sourceSets {
 		main {
@@ -16,5 +10,11 @@ allprojects {
 				srcDirs = ['test']
 			}
 		}
+	}
+}
+
+tasks {
+	task("buildingPrompt") {
+		println "准备开始构建项目"
 	}
 }
