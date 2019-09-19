@@ -1,9 +1,7 @@
 package org.pistachio.gateway.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
-import org.springframework.cloud.netflix.zuul.EnableZuulServer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -20,8 +18,6 @@ import org.springframework.context.annotation.PropertySource;
 @Slf4j
 @Configuration
 @EnableZuulProxy
-@EnableEurekaServer
-@EnableZuulServer
 @ComponentScan(basePackages = {"org.pistachio", "org.pistachio.gateway"})
 @PropertySource(value = {"classpath:application.yml", "classpath:application.properties"}, encoding = "utf-8", ignoreResourceNotFound = true)
 @EnableAspectJAutoProxy(proxyTargetClass = true)

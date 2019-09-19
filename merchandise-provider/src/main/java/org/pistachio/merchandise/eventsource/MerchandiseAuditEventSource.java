@@ -24,6 +24,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class MerchandiseAuditEventSource extends AbstractBusinessEventSource {
 
+    private Long id;
+
+    private String merchandiseName;
+
     @Override
     public AbstractBusinessEventSource setData(Object data) {
         return super.setData(data);

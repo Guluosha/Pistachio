@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.lang.Nullable;
 
+import javax.annotation.Resource;
 import java.util.Map;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
@@ -30,6 +31,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 @ComponentScan(basePackages = {"org.pistachio.*.**"})
 public class DefaultApplicationContext {
 
+    @Resource
+    private SpringApplicationContextHolder applicationContextHolder;
+
     @Bean(name = {"ScheduledThreadPoolExecutor"})
     ScheduledThreadPoolExecutor initializeScheduledThreadPoolExecutor() {
         return new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), buildThreadFactory(), buildRejectedExecutionHandler());
@@ -47,9 +51,9 @@ public class DefaultApplicationContext {
                 .businessEventListenerSet(Sets.newHashSet())
                 .threadPoolExecutor(initializeScheduledThreadPoolExecutor())
                 .build();
-        Map<String, BusinessEventListener> beansOfType = SpringApplicationContextHolder.getApplicationContext().getBeansOfType(BusinessEventListener.class);
+        Map<String, BusinessEventListener> beansOfType = applicationContextHolder.getApplicationContext().getBeansOfType(BusinessEventListener.class);
         for (String beanName : beansOfType.keySet()) {
-            defaultBusinessEventPublisher.registerEventListener(SpringApplicationContextHolder.getBean(beanName, BusinessEventListener.class));
+            defaultBusinessEventPublisher.registerEventListener(applicationContextHolder.getApplicationContext().getBean(beanName, BusinessEventListener.class));
         }
         return defaultBusinessEventPublisher;
     }

@@ -3,7 +3,9 @@ package org.pistachio.gateway.bean.filter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import lombok.extern.slf4j.Slf4j;
 import org.pistachio.gateway.constants.CustomRequestHeaderConstants;
+import org.pistachio.utilities.enums.ServiceNameEnum;
 import org.pistachio.utilities.enums.constants.SeparatorEnums;
 import org.pistachio.utilities.exception.BadRequestException;
 import org.springframework.stereotype.Component;
@@ -22,6 +24,7 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
  * @date 2019/1/5 ~ 下午 8:15
  */
 
+@Slf4j
 @Component
 public class AuthenticationFilter extends ZuulFilter {
 
@@ -60,9 +63,10 @@ public class AuthenticationFilter extends ZuulFilter {
     public boolean shouldFilter() {
         RequestContext currentContext = RequestContext.getCurrentContext();
         String requestUri = currentContext.getRequest().getRequestURI();
-        String[] splitStrings = requestUri.split(SeparatorEnums.URL_SEPARATOR.getString());
-        for (String splitString : splitStrings) {
-            if ("search".equalsIgnoreCase(splitString)) {
+        String[] urlFieldArray = requestUri.split(SeparatorEnums.URL_SEPARATOR.getString());
+        for (String urlField : urlFieldArray) {
+            if (urlField.equalsIgnoreCase(ServiceNameEnum.SEARCH.getServiceName())) {
+                log.info("接收到访问search服务的请求");
                 return false;
             }
         }

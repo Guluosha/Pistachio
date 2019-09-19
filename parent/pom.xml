@@ -12,7 +12,7 @@
 		<!-- Spring全家桶依赖版本 -->
 		<spring.test.version>5.1.0.RELEASE</spring.test.version>
 		<spring-boot-starter-serial.version>2.0.5.RELEASE</spring-boot-starter-serial.version>
-		<spring-cloud-starter-serial.version>2.0.1.RELEASE</spring-cloud-starter-serial.version>
+		<spring-cloud-starter-serial.version>2.1.0.RELEASE</spring-cloud-starter-serial.version>
 		<spring-cloud-bus.version>2.0.0.RELEASE</spring-cloud-bus.version>
 		<spring-boot-starter-quartz.version>2.1.0.M1</spring-boot-starter-quartz.version>
 		<spring-boot-starter-email.version>2.1.0.M1</spring-boot-starter-email.version>
@@ -23,8 +23,8 @@
 		<hikariCP.version>3.2.0</hikariCP.version>
 		<druid.version>1.1.2</druid.version>
 		<mysql-connector-java.version>8.0.16</mysql-connector-java.version>
-		<mybatis-spring.version>2.0.0</mybatis-spring.version>
-		<mybatis-plus.version>3.1.2</mybatis-plus.version>
+		<mybatis-spring-boot-starter.version>2.1.0</mybatis-spring-boot-starter.version>
+		<mybatis-plus.version>3.1.0</mybatis-plus.version>
 		<lombok.version>1.18.8</lombok.version>
 		<sharding-jdbc.version>2.0.3</sharding-jdbc.version>
 		<sharding-jdbc-orchestration>3.1.0</sharding-jdbc-orchestration>
@@ -35,114 +35,24 @@
 	<!-- Spring-core等是Spring体系的基础核心，Spring-boot是建立在Spring-core基础上的项目，Spring-cloud是建立在Spring-boot之上的项目（Spring-boot-start是一系列应用启动项目，Spring-cloud-start是启动项目，这俩都是最少功能的实现，带有parent的项目，是导入了所有的依赖，这个不好，还是看项目需要啥，再添加） -->
 	<dependencyManagement>
 		<dependencies>
-			<!-- Spring-boot依赖 -->
 			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-aop</artifactId>
-				<version>${spring-boot-starter-serial.version}</version>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Greenwich.SR2</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-cache</artifactId>
-				<version>${spring-boot-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-web</artifactId>
-				<version>${spring-boot-starter-web.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-webflux</artifactId>
-				<version>${spring-boot-starter-webflux.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-websocket</artifactId>
-				<version>${spring-boot-starter-websocket.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-quartz</artifactId>
-				<version>${spring-boot-starter-quartz.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-mail</artifactId>
-				<version>${spring-boot-starter-email.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-json</artifactId>
-				<version>${spring-boot-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-security</artifactId>
-				<version>${spring-boot-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-reactor-netty</artifactId>
-				<version>${spring-boot-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-validation</artifactId>
-				<version>${spring-boot-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-jdbc</artifactId>
-				<version>${spring-boot-starter-serial.version}</version>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>2.1.8.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 
-			<!-- Spring Cloud Starter Implementation -->
-			<!--<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>-->
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-gateway</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-openfeign</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-zipkin</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-oauth2</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-sleuth</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-zookeeper</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-
-			<!-- Spring Cloud Starter Netflix-Serial Implementation -->
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 				<version>${spring-cloud-starter-serial.version}</version>
 			</dependency>
 			<dependency>
@@ -152,47 +62,12 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+				<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
 				<version>${spring-cloud-starter-serial.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-netflix-archaius</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-netflix-spectator</artifactId>
-				<version>1.4.6.RELEASE</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-netflix-atlas</artifactId>
-				<version>1.4.6.RELEASE</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-netflix-turbine</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-netflix-turbine-amqp</artifactId>
-				<version>1.4.6.RELEASE</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-netflix-turbine-stream</artifactId>
+				<artifactId>spring-cloud-starter-openfeign</artifactId>
 				<version>${spring-cloud-starter-serial.version}</version>
 			</dependency>
 
@@ -209,32 +84,10 @@
 				<artifactId>mybatis-plus</artifactId>
 				<version>${mybatis-plus.version}</version>
 			</dependency>
-
-			<!-- Spring Boot Starter Database Support -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-data-jpa</artifactId>
-				<version>${spring-boot-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-data-redis</artifactId>
-				<version>${spring-boot-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-data-redis-reactive</artifactId>
-				<version>${spring-boot-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-				<version>${spring-boot-starter-serial.version}</version>
-			</dependency>
 			<dependency>
 				<groupId>org.mybatis.spring.boot</groupId>
 				<artifactId>mybatis-spring-boot-starter</artifactId>
-				<version>${mybatis-spring.version}</version>
+				<version>${mybatis-spring-boot-starter.version}</version>
 			</dependency>
 
 			<!-- Database Connection Pool -->
@@ -259,57 +112,6 @@
 				<groupId>io.shardingsphere</groupId>
 				<artifactId>sharding-jdbc-orchestration</artifactId>
 				<version>${sharding-jdbc-orchestration}</version>
-			</dependency>
-
-			<!-- Message Queue Middleware -->
-			<!--<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-stream</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>-->
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-stream-kafka</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-stream-rocketmq</artifactId>
-				<version>0.9.0.RELEASE</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-stream-redis</artifactId>
-				<version>1.0.0.RELEASE</version>
-			</dependency>
-
-			<!-- Message Bus -->
-			<!--<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-bus</artifactId>
-				<version>${spring-cloud-bus.version}</version>
-			</dependency>-->
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-bus-amqp</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-bus-kafka</artifactId>
-				<version>${spring-cloud-starter-serial.version}</version>
-			</dependency>
-
-			<!-- Log Support -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-log4j2</artifactId>
-				<version>${spring-boot-starter-serial.version}</version>
 			</dependency>
 
 		</dependencies>
@@ -349,18 +151,6 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.58</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>28.0-jre</version>
-		</dependency>
-
-		<!-- AOP -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.9.1</version>
 		</dependency>
 
 		<!-- 测试框架依赖（集中测试框架都写上，用哪个随便） -->

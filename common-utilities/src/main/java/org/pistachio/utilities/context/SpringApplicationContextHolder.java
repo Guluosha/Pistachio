@@ -1,5 +1,6 @@
 package org.pistachio.utilities.context;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -18,34 +19,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class SpringApplicationContextHolder implements ApplicationContextAware {
 
-    private static ApplicationContext applicationContext;
+    @Getter
+    private ApplicationContext applicationContext;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        SpringApplicationContextHolder.applicationContext = applicationContext;
+        this.applicationContext = applicationContext;
     }
 
-    public static ApplicationContext getApplicationContext() {
-        return applicationContext;
-    }
-
-    public static Object getBean(String beanName) {
-        return applicationContext.getBean(beanName);
-    }
-
-    public static Object getBean(String name, Object... args) {
-        return applicationContext.getBean(name, args);
-    }
-
-    public static <T> T getBean(String name, Class<T> requiredType) {
-        return applicationContext.getBean(name, requiredType);
-    }
-
-    public static <T> T getBean(Class<T> requiredType) {
-        return applicationContext.getBean(requiredType);
-    }
-
-    public static <T> T getBean(Class<T> requiredType, Object... args) {
-        return applicationContext.getBean(requiredType, args);
-    }
 }

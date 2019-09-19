@@ -1,10 +1,10 @@
-package org.pistachio.registration;
+package org.pistachio.search;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cloud.client.SpringCloudApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.PropertySource;
 
 /**
@@ -12,16 +12,16 @@ import org.springframework.context.annotation.PropertySource;
  * <br/><b/>
  *
  * @author SingleCycle(QQ ： 单曲循环)
- * @date 2019/6/11 ~ 下午 3:51
+ * @date 2019/9/19 ~ 下午 11:05
  */
 
 @Slf4j
-@EnableEurekaServer
+@EnableEurekaClient
 @PropertySource(value = {"classpath:application.yml"}, encoding = "utf-8")
-@SpringCloudApplication
-public class RegistrationCenterApplication {
+@SpringBootApplication
+public class SearchApplication {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(RegistrationCenterApplication.class).web(WebApplicationType.SERVLET).build().run(args);
+        new SpringApplicationBuilder(SearchApplication.class).web(WebApplicationType.SERVLET).build().run(args);
     }
 }

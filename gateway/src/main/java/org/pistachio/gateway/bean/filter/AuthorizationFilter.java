@@ -1,8 +1,8 @@
 package org.pistachio.gateway.bean.filter;
 
 import com.netflix.zuul.ZuulFilter;
-import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_TYPE;
@@ -16,6 +16,7 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
  * @date 2019/7/13 ~ 上午 1:13
  */
 
+@Slf4j
 @Component
 public class AuthorizationFilter extends ZuulFilter {
 
@@ -63,8 +64,7 @@ public class AuthorizationFilter extends ZuulFilter {
      */
     @Override
     public Object run() throws ZuulException {
-        RequestContext currentContext = RequestContext.getCurrentContext();
-
+        log.info("当前所有用户都拥有相同的权限");
         return null;
     }
 }
