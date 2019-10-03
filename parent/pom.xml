@@ -221,10 +221,19 @@
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <directory>${basedir}/target/</directory>
+                    <directory>${project.basedir}/target/</directory>
                     <verbose>true</verbose>
                     <failOnError>true</failOnError>
                     <detail>true</detail>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.basedir}/target/*</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${project.basedir}/src/main/docker</directory>
+                            <includes>${project.build.finalName}.${project.packaging}</includes>
+                        </fileset>
+                    </filesets>
                 </configuration>
             </plugin>
             <!-- compile（编译）插件 -->
@@ -272,6 +281,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M3</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
             </plugin>
             <!-- jar（打包）插件 -->
             <plugin>
@@ -279,6 +291,8 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
+                    <outputDirectory>${project.basedir}/src/main/docker</outputDirectory>
                     <detail>true</detail>
                     <includes>
                         <include>*.yml</include>
@@ -296,7 +310,7 @@
                 <configuration>
                     <detail>true</detail>
                     <useCache>true</useCache>
-                    <warName>${project.groupId}-${project.artifactId}-${project.version}.war</warName>
+                    <warName>${project.groupId}-${project.artifactId}-${project.version}</warName>
                 </configuration>
             </plugin>
             <!-- install（安装）插件 -->
@@ -331,17 +345,19 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>2.8.2</version>
                 <configuration>
-                    <file>target/${project.groupId}-${project.artifactId}-${project.version}.jar</file>
+                    <file>${project.build.outputDirectory}/${project.build.finalName}.${project.packaging}</file>
                     <groupId>${project.groupId}</groupId>
                     <artifactId>${project.artifactId}</artifactId>
                     <version>${project.version}</version>
-                    <localRepository>${LocalMavenRepositoryPath}</localRepository>
-                    <retryFailedDeploymentCount>5</retryFailedDeploymentCount>
-                    <packaging>jar</packaging>
+                    <packaging>${project.packaging}</packaging>
+                    <repositoryId>${project.distributionManagement.repository.id}</repositoryId>
                     <url>${project.distributionManagement.repository.url}</url>
+                    <retryFailedDeploymentCount>5</retryFailedDeploymentCount>
                     <deployAtEnd>true</deployAtEnd>
                     <detail>true</detail>
-                    <generatePom>true</generatePom>
+                    <pomFile>${project.basedir}/pom.xml</pomFile>
+                    <updateReleaseInfo>true</updateReleaseInfo>
+                    <description>This is ${project.artifactId}</description>
                 </configuration>
             </plugin>
         </plugins>

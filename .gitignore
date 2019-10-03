@@ -4,3 +4,4 @@ target
 *.iml
 rebel*.xml
 *.log
+*.jar
