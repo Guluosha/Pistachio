@@ -37,10 +37,10 @@
                     <detail>true</detail>
                     <filesets>
                         <fileset>
-                            <directory>target/*</directory>
+                            <directory>${project.basedir}/target</directory>
                         </fileset>
                         <fileset>
-                            <directory>src/main/docker</directory>
+                            <directory>${project.basedir}/src/main/docker</directory>
                             <includes>${project.build.finalName}.${project.packaging}</includes>
                         </fileset>
                     </filesets>
@@ -52,7 +52,6 @@
                 <configuration>
                     <skipTests>true</skipTests>
                 </configuration>
-
             </plugin>
         </plugins>
     </build>
