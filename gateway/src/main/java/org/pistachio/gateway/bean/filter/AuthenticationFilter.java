@@ -9,8 +9,11 @@ import org.pistachio.utilities.enums.ServiceNameEnum;
 import org.pistachio.utilities.enums.constants.SeparatorEnums;
 import org.pistachio.utilities.exception.BadRequestException;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.DEBUG_FILTER_ORDER;
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_TYPE;
@@ -27,6 +30,9 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
 @Slf4j
 @Component
 public class AuthenticationFilter extends ZuulFilter {
+
+    @Resource(name = "serviceNameMap")
+    private volatile Map<String, ServiceNameEnum> serviceNameEnumMap;
 
     public static final Integer AUTHENTICATION_FILTER_ORDER = DEBUG_FILTER_ORDER + 1;
 
@@ -65,9 +71,15 @@ public class AuthenticationFilter extends ZuulFilter {
         String requestUri = currentContext.getRequest().getRequestURI();
         String[] urlFieldArray = requestUri.split(SeparatorEnums.URL_SEPARATOR.getString());
         for (String urlField : urlFieldArray) {
-            if (urlField.equalsIgnoreCase(ServiceNameEnum.SEARCH.getServiceName())) {
-                log.info("接收到访问search服务的请求");
-                return false;
+            if (StringUtils.isEmpty(StringUtils.trimAllWhitespace(urlField))) {
+                continue;
+            }
+            ServiceNameEnum serviceNameEnum = serviceNameEnumMap.get(urlField);
+            if (serviceNameEnum != null) {
+                log.info("接收到访问" + serviceNameEnum.getServiceName() + "服务的请求");
+                if (urlField.equalsIgnoreCase(ServiceNameEnum.SEARCH.getServiceName())) {
+                    return false;
+                }
             }
         }
         return true;
@@ -86,7 +98,7 @@ public class AuthenticationFilter extends ZuulFilter {
         String macAddress = currentContextRequest.getHeader(CustomRequestHeaderConstants.MAC_ADDRESS);
         String internationalMobileEquipmentIdentity = currentContextRequest.getHeader(CustomRequestHeaderConstants.DEVICE_ID);
         if (userToken == null || macAddress == null || internationalMobileEquipmentIdentity == null) {
-            throw new BadRequestException("", 0, "");
+            throw new BadRequestException("访问被禁止", 403, "请求头参数异常");
         }
         return null;
     }
