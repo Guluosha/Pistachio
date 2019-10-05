@@ -13,7 +13,7 @@ ARG Version=0.0.1
 ARG Port=1025
 
 FROM ${RegistryAddress}/jdk:1.8
-COPY ./${ApplicationName}-${Version}.jar /build/jar/gateway
+ADD ./${ApplicationName}-${Version}.jar /build/jar/gateway
 
 LABEL maintainer="单曲循环（1019844337@qq.com）"
 LABEL application.name=${ApplicationName}
