@@ -331,6 +331,28 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--<plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <id>build-tag-push-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>tag</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <detail>true</detail>
+                    <registryUrl>localhost:65535</registryUrl>
+                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                    <imageName>localhost:65535/${project.artifactId}:${project.version}</imageName>
+                </configuration>
+            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
