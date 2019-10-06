@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: merchant
+server:
+  address: localhost
+  port: 10000
+eureka:
+  instance:
+    instance-id: ${spring.application.name}
+    appname: ${spring.application.name}
+    #    hostname: pistachio
+    ip-address: 127.0.0.1
+    prefer-ip-address: true
+    home-page-url: http://${server.address}:${server.port}/homePage
+    health-check-url: http://${server.address}:${server.port}/healthCheck
+    initial-status: up
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+  client:
+    service-url:
+      defaultZone: http://${server.address}:1024/eureka
+    #      defaultZone: http://${server.address}:${server.port}/registrationCenter_0,http://${server.address}:${server.port}/registrationCenter_1
+    #      backupZone: http://${server.address}:${server.port}/registrationCenter_1
+    enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+    registry-fetch-interval-seconds: 30
+    eureka-connection-idle-timeout-seconds: 30
+    eureka-server-connect-timeout-seconds: 5
+    eureka-service-url-poll-interval-seconds: 30
