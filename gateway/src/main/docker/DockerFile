@@ -11,12 +11,12 @@
 # ENTRYPOINT java -jar ${JarDir}/${ApplicationName}-${Version}.${FileType}
 ######## 解析器指令格式（换行符）：#escape=\，可以自定义，默认为“\”
 ARG RegistryAddress=localhost:65535
-FROM ${RegistryAddress}/openjdk:13
+FROM ${RegistryAddress}/openjdk:8
 ENV ApplicationName=gateway
 ENV Version=0.0.1
 ENV Port=1025
 ENV FileType=jar
-ENV FileDir=/build/jar/gateway/
+ENV FileDir=/build/jar/${ApplicationName}/
 
 ADD ./${ApplicationName}-${Version}.${FileType} ${FileDir}
 WORKDIR ${FileDir}
@@ -27,5 +27,6 @@ LABEL application.version=${Version}
 LABEL application.description="网关"
 
 EXPOSE ${Port}/tcp
+RUN ls ${FileDir}
 RUN java -version
 ENTRYPOINT ["/bin/sh", "-c", "java -jar ${ApplicationName}-${Version}.${FileType}"]
