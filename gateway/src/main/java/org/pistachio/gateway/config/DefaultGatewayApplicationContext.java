@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.PropertySource;
 
 import java.util.Map;
 
@@ -21,10 +20,9 @@ import java.util.Map;
  */
 
 @Slf4j
-@Configuration
 @EnableZuulProxy
-@ComponentScan(basePackages = {"org.pistachio", "org.pistachio.gateway"})
-@PropertySource(value = {"classpath:application.yml", "classpath:application.properties"}, encoding = "utf-8", ignoreResourceNotFound = true)
+@Configuration
+@ComponentScan(basePackages = {"org.pistachio.*"})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class DefaultGatewayApplicationContext {
 
