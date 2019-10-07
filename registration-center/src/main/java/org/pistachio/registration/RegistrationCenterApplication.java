@@ -4,8 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.SpringCloudApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
-import org.springframework.context.annotation.PropertySource;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -16,8 +14,6 @@ import org.springframework.context.annotation.PropertySource;
  */
 
 @Slf4j
-@EnableEurekaServer
-@PropertySource(value = {"classpath:application.yml"}, encoding = "utf-8")
 @SpringCloudApplication
 public class RegistrationCenterApplication {
 
