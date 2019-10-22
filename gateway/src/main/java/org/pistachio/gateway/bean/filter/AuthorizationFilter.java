@@ -13,14 +13,14 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
  * 授权过滤器
  *
  * @author SingleCycle(QQ ： 单曲循环)
- * @date 2019/7/13 ~ 上午 1:13
+ * @since 2019/7/13 ~ 上午 1:13
  */
 
 @Slf4j
 @Component
 public class AuthorizationFilter extends ZuulFilter {
 
-    private static final Integer AUTHORIZATION_FILTER_ORDER = AuthenticationFilter.AUTHENTICATION_FILTER_ORDER + 1;
+    public static final Integer AUTHORIZATION_FILTER_ORDER = AuthenticationFilter.AUTHENTICATION_FILTER_ORDER + 1;
 
     /**
      * to classify a filter by type. Standard types in Zuul are "pre" for pre-routing filtering,
