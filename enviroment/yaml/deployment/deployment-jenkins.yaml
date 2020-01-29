@@ -1,0 +1,64 @@
+#部署控制器（pod控制器的高层抽象角色）
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-ci-jenkins
+  namespace: service-ci
+  labels:
+    deployment.ci.name: jenkins
+    deployment.ci.env: all
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment.ci.name: jenkins
+      deployment.ci.env: all
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: deployment-ci-jenkins
+      labels:
+        deployment.ci.name: jenkins
+        deployment.ci.env: all
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins:latest
+          imagePullPolicy: IfNotPresent
+          tty: true
+          ports:
+            - containerPort: 8080
+              hostPort: 30000
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /usr/share/jenkins/war
+              name: jenkins-war
+              readOnly: false
+      volumes:
+        - name: jenkins-war
+          persistentVolumeClaim:
+            claimName: volume-ci-jenkins-binding
+            readOnly: false
+      restartPolicy: Always
+---
+# 持久卷的创建
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: volume-ci-jenkins-binding
+  namespace: service-ci
+  labels:
+    volume.ci.binding.name: volume-ci-jenkins-binding
+    volume.ci.binding.env: all
+spec:
+  volumeMode: Filesystem
+  volumeName: volume-ci-jenkins-binding
+  selector:
+    matchLabels:
+      volume.ci.binding.name: volume-ci-jenkins-binding
+      volume.ci.binding.env: all
