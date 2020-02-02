@@ -481,11 +481,11 @@
         <repository>
             <id>central</id>
             <name>阿里公共仓库</name>
-            <url>https://maven.aliyun.com/repository/central</url>
+            <url>https://maven.aliyun.com/nexus/content/repositories/central</url>
             <layout>default</layout>
             <releases>
-                <updatePolicy>always</updatePolicy>
                 <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
             </releases>
             <snapshots>
                 <enabled>true</enabled>
@@ -495,7 +495,7 @@
         <repository>
             <id>jcenter</id>
             <name>jcenter库</name>
-            <url>https://maven.aliyun.com/repository/jcenter</url>
+            <url>https://maven.aliyun.com/nexus/content/repositories/jcenter</url>
             <layout>default</layout>
             <releases>
                 <enabled>true</enabled>
@@ -507,17 +507,18 @@
             </snapshots>
         </repository>
         <repository>
-            <id>Central</id>
-            <name>中央仓库</name>
-            <url>http://central.maven.org/maven2/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </releases>
+            <id>public</id>
+            <name>central仓库和jcenter仓库的聚合仓库</name>
+            <layout>default</layout>
+            <url>https://maven.aliyun.com/nexus/content/groups/public</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
             </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
         </repository>
     </repositories>
 
