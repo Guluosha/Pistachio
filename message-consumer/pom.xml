@@ -6,7 +6,6 @@
 		<artifactId>parent</artifactId>
 		<groupId>org.pistachio</groupId>
 		<version>0.0.1</version>
-		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>message-consumer</artifactId>
@@ -15,11 +14,6 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.pistachio</groupId>
-			<artifactId>common-utilities</artifactId>
-			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.pistachio</groupId>
