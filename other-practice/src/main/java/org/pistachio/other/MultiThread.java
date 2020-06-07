@@ -1,4 +1,6 @@
-import config.NormalThreadFactory;
+package org.pistachio.other;
+
+import org.pistachio.config.NormalThreadFactory;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -17,7 +19,7 @@ public class MultiThread {
 
     private static boolean stopRequested;
 
-    private static ThreadPoolExecutor THREAD_POOL_EXECUTOR;
+    private static final ThreadPoolExecutor THREAD_POOL_EXECUTOR;
 
     static {
         int availableProcessors = Runtime.getRuntime().availableProcessors();
@@ -25,8 +27,6 @@ public class MultiThread {
     }
 
     /**
-     * jvm默认会尽力保证数据的可见性，若cpu有时间去保证数据可见性，那么线程就能获得最新的数据（神奇，现在才知道有这事，抽空看看多线程实战那本书，看看书里面有没有提到这点）
-     *
      * @param args 请求参数
      * @throws InterruptedException 中断异常类
      */
@@ -50,7 +50,7 @@ public class MultiThread {
             int index = 0;
             while (!stopRequested) {
                 try {
-                    TimeUnit.SECONDS.sleep(2L);
+                    TimeUnit.MICROSECONDS.sleep(2L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -58,6 +58,7 @@ public class MultiThread {
                 System.out.println("啥东西" + index);
             }
             System.out.println("哦豁，状态值被主线程改了" + stopRequested);
+            THREAD_POOL_EXECUTOR.shutdown();
         }
     }
 }

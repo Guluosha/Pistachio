@@ -1,4 +1,4 @@
-package config;
+package org.pistachio.config;
 
 import java.util.concurrent.ThreadFactory;
 
