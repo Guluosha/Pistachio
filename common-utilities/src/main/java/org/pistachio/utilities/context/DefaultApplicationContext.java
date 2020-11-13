@@ -9,6 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.lang.Nullable;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -63,11 +65,19 @@ public class DefaultApplicationContext {
         return new ThreadPoolExecutor.CallerRunsPolicy();
     }
 
-    private class CommonThreadFactory implements ThreadFactory {
+    @Bean
+    DefaultTransactionDefinition buildDefaultTransactionDefinition() {
+        DefaultTransactionDefinition defaultTransactionDefinition = new DefaultTransactionDefinition();
+        defaultTransactionDefinition.setIsolationLevel(TransactionDefinition.ISOLATION_READ_COMMITTED);
+        defaultTransactionDefinition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+        return defaultTransactionDefinition;
+    }
 
-        private String threadNamePrefix = "通用线程";
+    private static class CommonThreadFactory implements ThreadFactory {
 
-        private AtomicInteger threadCounter = new AtomicInteger(0);
+        private static final String THREAD_NAME_PREFIX = "通用线程";
+
+        private final AtomicInteger threadCounter = new AtomicInteger(0);
 
         /**
          * Constructs a new {@code Thread}.  Implementations may also initialize
@@ -79,10 +89,7 @@ public class DefaultApplicationContext {
          */
         @Override
         public Thread newThread(@Nullable Runnable runnable) {
-            if (runnable == null) {
-                return null;
-            }
-            return new Thread(runnable, threadNamePrefix + threadCounter);
+            return runnable == null ? null : new Thread(runnable, THREAD_NAME_PREFIX + threadCounter);
         }
     }
 }
