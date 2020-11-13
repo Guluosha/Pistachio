@@ -24,6 +24,7 @@
     <properties>
         <!-- Spring全家桶依赖版本 -->
         <spring.test.version>5.1.0.RELEASE</spring.test.version>
+        <spring.serial.version>5.0.9.RELEASE</spring.serial.version>
         <spring-boot-starter-serial.version>2.0.5.RELEASE</spring-boot-starter-serial.version>
         <spring-cloud-starter-serial.version>2.1.0.RELEASE</spring-cloud-starter-serial.version>
         <spring-cloud-bus.version>2.0.0.RELEASE</spring-cloud-bus.version>
@@ -153,6 +154,36 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.test.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.serial.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring.serial.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.serial.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.serial.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.serial.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.serial.version}</version>
         </dependency>
 
         <!-- Gson -->
