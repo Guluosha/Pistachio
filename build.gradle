@@ -1,0 +1,65 @@
+import java.nio.charset.StandardCharsets
+
+buildscript {
+    apply plugin: 'java'
+    apply plugin: 'application'
+}
+
+ext {
+    fastjsonVersion = '1.2.58'
+    gsonVersion = '2.8.5'
+    lombokVersion = '1.18.8'
+    swaggerVersion = '2.9.2'
+    springBootStarterVersion = '2.0.5.RELEASE'
+    springAopVersion = '5.0.8.RELEASE'
+    springAspectsVersion = '5.0.8.RELEASE'
+    springTransactionVersion = '3.2.13.RELEASE'
+    springJdbcVersion = '3.2.13.RELEASE'
+    springTestVersion = '5.1.0.RELEASE'
+    springWebMVCVersion = '4.3.29.RELEASE'
+    springMybatisVersion = '2.0.5'
+
+    /*compileJava.options.encoding = StandardCharsets.UTF_8.name()
+    compileTestJava.options.encoding = StandardCharsets.UTF_8.name()
+    sourceCompatibility = '1.8'*/
+}
+
+configure(subprojects) { project ->
+    group = 'org.pistachio'
+    version = '0.0.1'
+
+    repositories {
+        maven { url = 'https://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url = 'https://maven.aliyun.com/nexus/content/repositories/central' }
+        maven { url = 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        mavenLocal()
+        google()
+        jcenter()
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'application'
+
+    compileJava.options.encoding = StandardCharsets.UTF_8.name()
+    compileTestJava.options.encoding = StandardCharsets.UTF_8.name()
+    sourceCompatibility = '1.8'
+
+    dependencies {
+        compile "com.alibaba:fastjson:${fastjsonVersion}"
+        compile "com.google.code.gson:gson:${gsonVersion}"
+        compile "org.projectlombok:lombok:${lombokVersion}"
+        compile "io.springfox:springfox-swagger2:${swaggerVersion}"
+        compile "org.springframework.boot:spring-boot-configuration-processor:${springBootStarterVersion}"
+        compile "org.springframework.boot:spring-boot-starter-actuator:${springBootStarterVersion}"
+        compile "org.springframework.boot:spring-boot-starter-test:${springBootStarterVersion}"
+        compile "org.springframework:spring-context-support:${springWebMVCVersion}"
+        compile "org.springframework:spring-aop:${springAopVersion}"
+        compile "org.springframework:spring-aspects:${springAspectsVersion}"
+        compile "org.springframework:spring-tx:${springTransactionVersion}"
+        compile "org.springframework:spring-jdbc:${springJdbcVersion}"
+        compile "org.springframework:spring-test:${springTestVersion}"
+        compile "org.springframework:spring-webmvc:${springWebMVCVersion}"
+        compile "org.mybatis:mybatis-spring:${springMybatisVersion}"
+    }
+
+}
