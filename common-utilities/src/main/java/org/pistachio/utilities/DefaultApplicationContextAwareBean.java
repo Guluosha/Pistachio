@@ -23,4 +23,8 @@ public class DefaultApplicationContextAwareBean implements ApplicationContextAwa
     public void setApplicationContext(@Nullable ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
+
+    public ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
 }

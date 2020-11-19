@@ -63,7 +63,7 @@ public class DefaultApplicationContext {
         return new ThreadPoolExecutor.CallerRunsPolicy();
     }
 
-    private class CommonThreadFactory implements ThreadFactory {
+    private static class CommonThreadFactory implements ThreadFactory {
 
         private String threadNamePrefix = "通用线程";
 
