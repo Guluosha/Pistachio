@@ -9,6 +9,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
+        <spring-cloud-starter-serial.version>2.0.1.RELEASE</spring-cloud-starter-serial.version>
+        <spring-boot-starter-test.version>2.0.5.RELEASE</spring-boot-starter-test.version>
+        <spring.serial.version>5.0.9.RELEASE</spring.serial.version>
         <sharding-jdbc.version>2.0.3</sharding-jdbc.version>
         <sharding-jdbc-orchestration>3.1.0</sharding-jdbc-orchestration>
         <spring-cloud-starter-serial.version>2.0.1.RELEASE</spring-cloud-starter-serial.version>
@@ -31,22 +34,35 @@
             <artifactId>lombok</artifactId>
             <version>1.18.2</version>
         </dependency>
-
-        <!-- Database Middleware -->
         <dependency>
-            <groupId>io.shardingjdbc</groupId>
-            <artifactId>sharding-jdbc-core</artifactId>
-            <version>${sharding-jdbc.version}</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.serial.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-orchestration</artifactId>
-            <version>${sharding-jdbc-orchestration}</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring.serial.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-            <version>${sharding-jdbc.version}</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.serial.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.serial.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.serial.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.serial.version}</version>
         </dependency>
     </dependencies>
 

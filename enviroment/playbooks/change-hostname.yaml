@@ -1,0 +1,7 @@
+- hosts: k8s_node
+  remote_user: root
+  tasks:
+    - name: change hostname to ip address
+      shell: "hostnamectl set-hostname {{hostname|quote}}"
+    - name: echo hostname
+      shell: hostnamectl status | head -n 1

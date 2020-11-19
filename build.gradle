@@ -1,5 +1,8 @@
+import java.nio.charset.StandardCharsets
+
 buildscript {
     apply plugin: 'java'
+    apply plugin: 'application'
 }
 
 ext {
@@ -15,6 +18,10 @@ ext {
     springTestVersion = '5.1.0.RELEASE'
     springWebMVCVersion = '4.3.29.RELEASE'
     springMybatisVersion = '2.0.5'
+
+    /*compileJava.options.encoding = StandardCharsets.UTF_8.name()
+    compileTestJava.options.encoding = StandardCharsets.UTF_8.name()
+    sourceCompatibility = '1.8'*/
 }
 
 configure(subprojects) { project ->
@@ -33,6 +40,10 @@ configure(subprojects) { project ->
     apply plugin: 'java'
     apply plugin: 'application'
 
+    compileJava.options.encoding = StandardCharsets.UTF_8.name()
+    compileTestJava.options.encoding = StandardCharsets.UTF_8.name()
+    sourceCompatibility = '1.8'
+
     dependencies {
         compile "com.alibaba:fastjson:${fastjsonVersion}"
         compile "com.google.code.gson:gson:${gsonVersion}"
@@ -41,10 +52,8 @@ configure(subprojects) { project ->
         compile "org.springframework.boot:spring-boot-configuration-processor:${springBootStarterVersion}"
         compile "org.springframework.boot:spring-boot-starter-actuator:${springBootStarterVersion}"
         compile "org.springframework.boot:spring-boot-starter-test:${springBootStarterVersion}"
+        compile "org.springframework:spring-context-support:${springWebMVCVersion}"
         compile "org.springframework:spring-aop:${springAopVersion}"
-        compile "org.springframework:spring-beans:${springWebMVCVersion}"
-        compile "org.springframework:spring-context:${springWebMVCVersion}"
-        compile "org.springframework:spring-core:${springWebMVCVersion}"
         compile "org.springframework:spring-aspects:${springAspectsVersion}"
         compile "org.springframework:spring-tx:${springTransactionVersion}"
         compile "org.springframework:spring-jdbc:${springJdbcVersion}"
