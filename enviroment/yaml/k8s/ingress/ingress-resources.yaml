@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-test
+  namespace: ingress-nginx
+  annotations:
+    kubernetes.io/ingress.class: 'nginx'
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  rules:
+    - host: www.bonree.com
+      http:
+        paths:
+          - path: /welcome
+            backend:
+              serviceName: nginx
+              servicePort: 8080

@@ -3,8 +3,9 @@ ext {
 }
 
 dependencies {
-    compile "org.springframework.cloud:spring-cloud-starter:${springCloudVersion}"
+//    compile "org.springframework.cloud:spring-cloud-starter:${springCloudVersion}"
     compile "org.springframework.cloud:spring-cloud-starter-netflix-zuul:${springCloudVersion}"
-//    compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-server"
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-server${springCloudVersion}"
+    compile "org.mybatis.spring.org.singledog.spring.boot:mybatis-spring-boot-starter:1.3.5"
     compile project(':common-utilities')
 }

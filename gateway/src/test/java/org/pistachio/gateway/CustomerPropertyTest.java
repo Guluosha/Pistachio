@@ -2,7 +2,6 @@ package org.pistachio.gateway;
 
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.test.context.ContextConfiguration;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -13,7 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
  */
 
 @RunWith(value = MockitoJUnitRunner.class)
-@ContextConfiguration(classes = {GatewayApplication.class})
 public class CustomerPropertyTest {
 
 }

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: volume-ci-jenkins-binding
+  namespace: service-ci
+  labels:
+    volume.ci.binding.name: volume-ci-jenkins-binding
+    volume.ci.binding.env: all
+spec:
+  volumeMode: Filesystem
+  volumeName: volume-ci-jenkins-binding
+  selector:
+    matchLabels:
+      volume.ci.binding.name: volume-ci-jenkins-binding
+      volume.ci.binding.env: all
