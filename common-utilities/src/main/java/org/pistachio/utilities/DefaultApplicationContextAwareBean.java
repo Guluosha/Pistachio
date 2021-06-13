@@ -1,6 +1,5 @@
 package org.pistachio.utilities;
 
-import lombok.Data;
 import lombok.Getter;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -27,7 +26,4 @@ public class DefaultApplicationContextAwareBean implements ApplicationContextAwa
         this.applicationContext = applicationContext;
     }
 
-    public ApplicationContext getApplicationContext() {
-        return applicationContext;
-    }
 }

@@ -2,17 +2,13 @@ package org.pistachio.merchandise;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.pistachio.merchandise.event.MerchandiseAuditEvent;
 import org.pistachio.merchandise.eventsource.MerchandiseAuditEventSource;
 import org.pistachio.utilities.context.SpringApplicationContextHolder;
 import org.pistachio.utilities.listener.BusinessEventListener;
 import org.pistachio.utilities.publisher.DefaultBusinessEventPublisher;
 import org.springframework.beans.factory.BeanFactoryUtils;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.MethodParameter;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
@@ -37,9 +33,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 
 @Slf4j
-@RunWith(value = SpringRunner.class)
+/*@RunWith(value = SpringRunner.class)
 @SpringBootTest(classes = {MerchandiseApplication.class})
-@TestPropertySource(locations = {"classpath:test/application.yml"})
+@TestPropertySource(locations = {"classpath:test/application.yml"})*/
 public class UtilitiesApplicationTest {
 
     @Resource
