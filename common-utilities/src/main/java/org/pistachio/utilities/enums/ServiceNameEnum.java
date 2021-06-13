@@ -80,7 +80,7 @@ public enum ServiceNameEnum {
      */
     USER("user");
 
-    private String serviceName;
+    private final String serviceName;
 
     ServiceNameEnum(String serviceName) {
         this.serviceName = serviceName;
