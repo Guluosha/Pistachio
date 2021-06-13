@@ -1,11 +1,9 @@
 package org.pistachio.utilities.publisher;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.pistachio.utilities.event.AbstractBusinessEvent;
 import org.pistachio.utilities.listener.BusinessEventListener;
 import org.pistachio.utilities.listener.ExceptionHandler;
@@ -23,21 +21,15 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class DefaultBusinessEventPublisher implements BusinessEventPublisher {
 
-    @Getter
-    @Setter
     private Set<BusinessEventListener> businessEventListenerSet;
 
-    @Getter
-    @Setter
     private ExceptionHandler exceptionHandler;
 
-    @Getter
-    @Setter
     private ThreadPoolExecutor threadPoolExecutor;
 
     /**

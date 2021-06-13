@@ -4,18 +4,20 @@ import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.pistachio.utilities.listener.BusinessEventListener;
 import org.pistachio.utilities.publisher.DefaultBusinessEventPublisher;
+import org.pistachio.utilities.utils.NormalThreadFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.lang.Nullable;
 
-import javax.annotation.Resource;
 import java.util.Map;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -27,33 +29,34 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 
 @Slf4j
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 @Configuration
 @ComponentScan(basePackages = {"org.pistachio.*.**"})
-public class DefaultApplicationContext {
+public class DefaultApplicationContext implements ApplicationContextAware {
 
-    @Resource
-    private SpringApplicationContextHolder applicationContextHolder;
+    private ApplicationContext applicationContext;
 
-    @Bean(name = {"ScheduledThreadPoolExecutor"})
+    @Bean(name = {"scheduledThreadPoolExecutor"})
     ScheduledThreadPoolExecutor initializeScheduledThreadPoolExecutor() {
         return new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), buildThreadFactory(), buildRejectedExecutionHandler());
     }
 
-    @Bean(name = {"ThreadFactory"})
+    @Bean(name = {"normalThreadFactory"})
+    @Scope(scopeName = ConfigurableBeanFactory.SCOPE_SINGLETON)
     ThreadFactory buildThreadFactory() {
-        return new CommonThreadFactory();
+        return new NormalThreadFactory();
     }
 
-    @Bean(name = "DefaultBusinessEventPublisher")
-    @Scope(scopeName = "singleton")
+    @Bean(name = "defaultBusinessEventPublisher")
+    @Scope(scopeName = ConfigurableBeanFactory.SCOPE_SINGLETON)
     DefaultBusinessEventPublisher initDefaultBusinessPublisher() {
         DefaultBusinessEventPublisher defaultBusinessEventPublisher = DefaultBusinessEventPublisher.builder()
                 .businessEventListenerSet(Sets.newHashSet())
                 .threadPoolExecutor(initializeScheduledThreadPoolExecutor())
                 .build();
-        Map<String, BusinessEventListener> beansOfType = applicationContextHolder.getApplicationContext().getBeansOfType(BusinessEventListener.class);
+        Map<String, BusinessEventListener> beansOfType = applicationContext.getBeansOfType(BusinessEventListener.class);
         for (String beanName : beansOfType.keySet()) {
-            defaultBusinessEventPublisher.registerEventListener(applicationContextHolder.getApplicationContext().getBean(beanName, BusinessEventListener.class));
+            defaultBusinessEventPublisher.registerEventListener(applicationContext.getBean(beanName, BusinessEventListener.class));
         }
         return defaultBusinessEventPublisher;
     }
@@ -63,26 +66,9 @@ public class DefaultApplicationContext {
         return new ThreadPoolExecutor.CallerRunsPolicy();
     }
 
-    private class CommonThreadFactory implements ThreadFactory {
-
-        private String threadNamePrefix = "通用线程";
-
-        private AtomicInteger threadCounter = new AtomicInteger(0);
-
-        /**
-         * Constructs a new {@code Thread}.  Implementations may also initialize
-         * priority, name, daemon status, {@code ThreadGroup}, etc.
-         *
-         * @param runnable a runnable to be executed by new thread instance
-         * @return constructed thread, or {@code null} if the request to
-         * create a thread is rejected
-         */
-        @Override
-        public Thread newThread(@Nullable Runnable runnable) {
-            if (runnable == null) {
-                return null;
-            }
-            return new Thread(runnable, threadNamePrefix + threadCounter);
-        }
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
+
 }
