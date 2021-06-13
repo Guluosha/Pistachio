@@ -39,9 +39,7 @@ public class DefaultBusinessEventPublisher implements BusinessEventPublisher {
      */
     @Override
     public void registerEventListener(BusinessEventListener listener) {
-        if (!businessEventListenerSet.contains(listener)) {
-            businessEventListenerSet.add(listener);
-        }
+        businessEventListenerSet.add(listener);
     }
 
     /**
@@ -51,9 +49,7 @@ public class DefaultBusinessEventPublisher implements BusinessEventPublisher {
      */
     @Override
     public void removeEventListener(BusinessEventListener listener) {
-        if (businessEventListenerSet.contains(listener)) {
-            businessEventListenerSet.remove(listener);
-        }
+        businessEventListenerSet.remove(listener);
     }
 
     /**

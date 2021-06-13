@@ -1,0 +1,14 @@
+import java.nio.charset.StandardCharsets
+
+ext {
+    springCloudVersion = '2.0.1.RELEASE'
+
+    compileJava.options.encoding = StandardCharsets.UTF_8.name()
+    compileTestJava.options.encoding = StandardCharsets.UTF_8.name()
+    sourceCompatibility = '1.8'
+}
+
+dependencies {
+    compile "org.springframework.cloud:spring-cloud-starter:${springCloudVersion}"
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-zuul:${springCloudVersion}"
+}

@@ -2,12 +2,19 @@ package org.pistachio.gateway.config;
 
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.pistachio.utilities.enums.ServiceNameEnum;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
 
 import java.util.Map;
 
@@ -24,7 +31,10 @@ import java.util.Map;
 @Configuration
 @ComponentScan(basePackages = {"org.pistachio.*"})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
+@MapperScan
 public class DefaultGatewayApplicationContext {
+
+    private static final String API_PACKAGE = "org.pistachio.*";
 
     @Bean(name = {"serviceNameMap"})
     Map<String, ServiceNameEnum> initServiceNameMap() {
@@ -34,5 +44,24 @@ public class DefaultGatewayApplicationContext {
             serviceNameEnumMap.put(serviceNameEnum.getServiceName(), serviceNameEnum);
         }
         return serviceNameEnumMap;
+    }
+
+    @Bean
+    public Docket initDocket() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(initApiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage(API_PACKAGE))
+                .paths(PathSelectors.any()).build();
+    }
+
+    @Bean
+    public ApiInfo initApiInfo() {
+        return new ApiInfoBuilder()
+                .title("接口文档")
+                .description("所有接口的文档描述")
+                .version("1.0.0")
+                .termsOfServiceUrl("https://www.baidu.com")
+                .build();
     }
 }

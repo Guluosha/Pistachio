@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pistachio-gateway-service
+  namespace: service-pistachio
+  labels:
+    service.pistachio.name: pistachio-gateway-service
+    service.pistachio.env: develop
+    service.pistachio.org: pistachio
+spec:
+  selector:
+    deployment.pistachio.name: pistachio-gateway-service
+    deployment.pistachio.env:  develop
+    deployment.pistachio.org: pistachio
+  ports:
+    - port: 1025
+      targetPort: 1025
+      nodePort: 1025
+      name: gateway
+      protocol: TCP
+  type: NodePort
+  clusterIP: 172.16.255.1
+  publishNotReadyAddresses: false

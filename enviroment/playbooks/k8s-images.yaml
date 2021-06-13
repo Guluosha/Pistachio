@@ -1,0 +1,59 @@
+- hosts: k8s_node
+  serial: 6
+  vars:
+    docker_api_version: "1.38"
+    image_repository: "registry.cn-hangzhou.aliyuncs.com/kube-iamges"
+    kubernetes_version: "v1.17.0"
+    coredns_version: "1.6.5"
+    pause_version: "3.1"
+    etcd_version: "3.4.3-0"
+    calico_image: "registry.cn-hangzhou.aliyuncs.com/icontainer/k8s_calico:v3.3.1"
+  tasks:
+    - name: pull kubernetes image - kube-scheduler
+      remote_user: root
+      docker_image:
+        api_version: "{{docker_api_version}}"
+        name: "{{image_repository}}/kube-scheduler:{{kubernetes_version}}"
+        source: pull
+    - name: pull kubernetes image - kuber-controller-manager
+      remote_user: root
+      docker_image:
+        api_version: "{{docker_api_version}}"
+        name: "{{image_repository}}/kube-controller-manager:{{kubernetes_version}}"
+        source: pull
+    - name: pull kubernetes image - kube-proxy
+      remote_user: root
+      docker_image:
+        api_version: "{{docker_api_version}}"
+        name: "{{image_repository}}/kube-proxy:{{kubernetes_version}}"
+        source: pull
+    - name: pull kubernetes image - kube-apiserver
+      remote_user: root
+      docker_image:
+        api_version: "{{docker_api_version}}"
+        name: "{{image_repository}}/kube-apiserver:{{kubernetes_version}}"
+        source: pull
+    - name: pull kubernetes image - coredns
+      remote_user: root
+      docker_image:
+        api_version: "{{docker_api_version}}"
+        name: "{{image_repository}}/coredns:{{coredns_version}}"
+        source: pull
+    - name: pull kubernetes image - pause
+      remote_user: root
+      docker_image:
+        api_version: "{{docker_api_version}}"
+        name: "{{image_repository}}/pause:{{pause_version}}"
+        source: pull
+    - name: pull distributed kv-database image - etcd
+      remote_user: root
+      docker_image:
+        api_version: "{{docker_api_version}}"
+        name: "{{image_repository}}/etcd:{{etcd_version}}"
+        source: pull
+    - name: pull network plugin image - calico
+      remote_user: root
+      docker_image:
+        api_version: "{{docker_api_version}}"
+        name: "{{calico_image}}"
+        source: pull

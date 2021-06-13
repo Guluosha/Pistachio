@@ -23,66 +23,60 @@
 
     <properties>
         <!-- Spring全家桶依赖版本 -->
-        <spring.test.version>5.1.0.RELEASE</spring.test.version>
-        <spring-boot-starter-serial.version>2.0.5.RELEASE</spring-boot-starter-serial.version>
-        <spring-cloud-starter-serial.version>2.1.0.RELEASE</spring-cloud-starter-serial.version>
-        <spring-cloud-bus.version>2.0.0.RELEASE</spring-cloud-bus.version>
-        <spring-boot-starter-quartz.version>2.1.0.M1</spring-boot-starter-quartz.version>
-        <spring-boot-starter-email.version>2.1.0.M1</spring-boot-starter-email.version>
-        <spring-boot-starter-web.version>2.0.5.RELEASE</spring-boot-starter-web.version>
-        <spring-boot-starter-webflux.version>2.1.5.RELEASE</spring-boot-starter-webflux.version>
-        <spring-boot-starter-websocket.version>2.1.5.RELEASE</spring-boot-starter-websocket.version>
-        <compiler.version>3.7.0</compiler.version>
-        <hikariCP.version>3.2.0</hikariCP.version>
-        <druid.version>1.1.2</druid.version>
+        <spring.cloud.version>Hoxton.SR10</spring.cloud.version>
+        <spring.cloud-boot.version>2.3.9.RELEASE</spring.cloud-boot.version>
+        <!--        <spring.cloud.version>2020.0.0</spring.cloud.version>-->
+        <!--        <spring.cloud-boot.version>2.4.0</spring.cloud-boot.version>-->
+        <spring.cloud.alibaba.version>2.2.1.RELEASE</spring.cloud.alibaba.version>
+        <spring.cloud.alibaba-boot.version>1.0.0</spring.cloud.alibaba-boot.version>
         <mysql-connector-java.version>8.0.16</mysql-connector-java.version>
-        <mybatis-spring-boot-starter.version>2.1.0</mybatis-spring-boot-starter.version>
+        <hikariCP.version>3.2.0</hikariCP.version>
+        <mybatis-spring-boot-starter.version>2.1.3</mybatis-spring-boot-starter.version>
         <mybatis-plus.version>3.1.0</mybatis-plus.version>
-        <lombok.version>1.18.8</lombok.version>
         <sharding-jdbc.version>2.0.3</sharding-jdbc.version>
         <sharding-jdbc-orchestration>3.1.0</sharding-jdbc-orchestration>
         <LocalMavenRepositoryPath>D:\MavenRepository</LocalMavenRepositoryPath>
         <jdk.version>1.8</jdk.version>
+        <compiler.version>3.7.0</compiler.version>
+        <lombok.version>1.18.18</lombok.version>
+        <swagger2.version>3.0.0</swagger2.version>
     </properties>
 
     <!-- 依赖版本同意管理 -->
     <!-- Spring-core等是Spring体系的基础核心，Spring-boot是建立在Spring-core基础上的项目，Spring-cloud是建立在Spring-boot之上的项目（Spring-boot-start是一系列应用启动项目，Spring-cloud-start是启动项目，这俩都是最少功能的实现，带有parent的项目，是导入了所有的依赖，这个不好，还是看项目需要啥，再添加） -->
     <dependencyManagement>
         <dependencies>
+
+            <!-- Spring-cloud -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Greenwich.SR2</version>
+                <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.1.8.RELEASE</version>
+                <version>${spring.cloud-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
 
+            <!-- Spring-cloud-alibaba -->
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-                <version>${spring-cloud-starter-serial.version}</version>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring.cloud.alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-                <version>${spring-cloud-starter-serial.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
-                <version>${spring-cloud-starter-serial.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-openfeign</artifactId>
-                <version>${spring-cloud-starter-serial.version}</version>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>aliyun-spring-boot-dependencies</artifactId>
+                <version>${spring.cloud.alibaba-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <!-- Database Driver -->
@@ -104,18 +98,6 @@
                 <version>${mybatis-spring-boot-starter.version}</version>
             </dependency>
 
-            <!-- Database Connection Pool -->
-            <dependency>
-                <groupId>com.zaxxer</groupId>
-                <artifactId>HikariCP</artifactId>
-                <version>${hikariCP.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid.version}</version>
-            </dependency>
-
             <!-- Database Middleware -->
             <dependency>
                 <groupId>io.shardingjdbc</groupId>
@@ -133,28 +115,11 @@
 
     <!-- Unify Base Dependencies -->
     <dependencies>
-        <!-- Spring Boot Starter -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <version>${spring-boot-starter-serial.version}</version>
+            <groupId>javax.transaction</groupId>
+            <artifactId>javax.transaction-api</artifactId>
+            <version>1.3</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-            <version>${spring-boot-starter-serial.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring-boot-starter-serial.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.test.version}</version>
-        </dependency>
-
         <!-- Gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -209,7 +174,7 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger2.version}</version>
         </dependency>
     </dependencies>
 
@@ -535,6 +500,9 @@
     <profiles>
         <profile>
             <id>forDevelopEnvironment</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
         <profile>
             <id>forTestEnvironment</id>

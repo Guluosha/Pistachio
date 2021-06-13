@@ -48,7 +48,7 @@
 		<module>message-consumer</module>
 		<module>sensors-data</module>
 		<module>other-practice</module>
-	</modules>
+    </modules>
 	<description>这都是要学的后台技术</description>
 
 </project>

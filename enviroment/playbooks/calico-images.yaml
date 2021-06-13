@@ -1,0 +1,53 @@
+- hosts: node
+  remote_user: root
+  vars:
+    docker_api_version: "v1.38"
+    image_version: "v3.16.5"
+    image_repository: "registry.cn-hangzhou.aliyuncs.com/linkflow"
+    calico_repository: "calico"
+  tasks:
+    - name: pull cni plugin(calico) image - kube-controllers
+      docker_image:
+        name: "{{image_repository}}/calico-kube-controllers:{{image_version}}"
+        source: pull
+    - name: pull cni plugin(calico) image - calico-node
+      docker_image:
+        name: "{{image_repository}}/calico-node:{{image_version}}"
+        source: pull
+    - name: pull cni plugin(calico) image - calico-pod2daemon-flexvol
+      docker_image:
+        name: "{{image_repository}}/calico-pod2daemon-flexvol:{{image_version}}"
+        source: pull
+    - name: pull cni plugin(calico) image - calico-cni
+      docker_image:
+        name: "{{image_repository}}/calico-cni:{{image_version}}"
+        source: pull
+  post_tasks:
+    - name: tag cni plugin(calico) image - kube-controllers
+      docker_image:
+        name: "{{image_repository}}/calico-kube-controllers:{{image_version}}"
+        source: local
+        state: present
+        repository: "{{calico_repository}}/kube-controllers"
+        tag: "{{image_version}}"
+    - name: tag cni plugin(calico) image - node
+      docker_image:
+        name: "{{image_repository}}/calico-node:{{image_version}}"
+        source: local
+        state: present
+        repository: "{{calico_repository}}/node"
+        tag: "{{image_version}}"
+    - name: tag cni plugin(calico) image - pod2daemon-flexvol
+      docker_image:
+        name: "{{image_repository}}/calico-pod2daemon-flexvol:{{image_version}}"
+        source: local
+        state: present
+        repository: "{{calico_repository}}/pod2daemon-flexvol"
+        tag: "{{image_version}}"
+    - name: tag cni plugin(calico) image - cni
+      docker_image:
+        name: "{{image_repository}}/calico-cni:{{image_version}}"
+        source: local
+        state: present
+        repository: "{{calico_repository}}/cni"
+        tag: "{{image_version}}"

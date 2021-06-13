@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: service-ci
+  clusterName: service-ci-master
+  labels:
+    namespace.name: service-ci
+    namespace.org: pistachio

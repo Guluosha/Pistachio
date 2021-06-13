@@ -1,4 +1,4 @@
-package org.pistachio.gateway.bean.filter;
+package org.pistachio.gateway.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.exception.ZuulException;

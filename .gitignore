@@ -2,6 +2,7 @@
 .idea
 target
 *.iml
-rebel*.xml
+*rebel*.xml
+*rebel*.xml*
 *.log
 *.jar

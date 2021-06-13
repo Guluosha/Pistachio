@@ -2,7 +2,7 @@ spring:
   application:
     name: gateway
 server:
-  port: 1025
+  port: 1027
   address: localhost
   server-header: brand
 eureka:

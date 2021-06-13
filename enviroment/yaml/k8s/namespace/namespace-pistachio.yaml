@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: service-pistachio
+  clusterName: service-pistachio-master
+  labels:
+    namespace.name: service-pistachio
+    namespace.org: pistachio
