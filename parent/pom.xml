@@ -38,7 +38,7 @@
         <LocalMavenRepositoryPath>D:\MavenRepository</LocalMavenRepositoryPath>
         <jdk.version>1.8</jdk.version>
         <compiler.version>3.7.0</compiler.version>
-        <lombok.version>1.18.18</lombok.version>
+        <lombok.version>1.18.20</lombok.version>
         <swagger2.version>3.0.0</swagger2.version>
     </properties>
 
