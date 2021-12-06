@@ -36,7 +36,7 @@
         <sharding-jdbc.version>2.0.3</sharding-jdbc.version>
         <sharding-jdbc-orchestration>3.1.0</sharding-jdbc-orchestration>
         <LocalMavenRepositoryPath>D:\MavenRepository</LocalMavenRepositoryPath>
-        <jdk.version>1.8</jdk.version>
+        <jdk.version>1.11</jdk.version>
         <compiler.version>3.7.0</compiler.version>
         <lombok.version>1.18.20</lombok.version>
         <swagger2.version>3.0.0</swagger2.version>
@@ -228,10 +228,10 @@
                     <excludes>
                         <exclude>rebel*.xml</exclude>
                     </excludes>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
                     <encoding>utf-8</encoding>
-                    <compilerVersion>1.8</compilerVersion>
+                    <compilerVersion>${jdk.version}</compilerVersion>
                     <verbose>true</verbose>
                     <optimize>true</optimize>
                     <showWarnings>true</showWarnings>
