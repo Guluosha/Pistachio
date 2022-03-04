@@ -14,19 +14,19 @@ public enum MessageChannelNameEnum {
     /**
      * 物流消息通道
      */
-    LogisticMessageOutputChannel("LogisticMessageOutputChannel"),
+    LOGISTIC_MESSAGE_OUTPUT_CHANNEL("LogisticMessageOutputChannel"),
 
     /**
      * 商品消息通道
      */
-    MerchandiseOutputChannel("MerchandiseOutputChannel"),
+    MERCHANDISE_OUTPUT_CHANNEL("MerchandiseOutputChannel"),
 
     /**
      * 订单消息通道
      */
-    OrderMessageOutputChannel("OrderMessageOutputChannel");
+    MESSAGE_CHANNEL_NAME_ENUM("OrderMessageOutputChannel");
 
-    private String name;
+    private final String name;
 
     MessageChannelNameEnum(String name) {
         this.name = name;

@@ -1,5 +1,8 @@
 package org.pistachio.utilities.utils;
 
+import lombok.Data;
+import lombok.experimental.SuperBuilder;
+
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -12,7 +15,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2021/06/13,013 ~ 下午 2:19
  */
 
-public class NormalThreadFactory implements ThreadFactory {
+@Data
+@SuperBuilder
+public class NormalThreadFactoryUtils implements ThreadFactory {
 
     private static final String THREAD_NAME_PREFIX = "通用线程";
 

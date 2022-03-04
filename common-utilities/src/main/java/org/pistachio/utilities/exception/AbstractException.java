@@ -21,7 +21,7 @@ public abstract class AbstractException extends ZuulException {
      * @param nStatusCode 异常码
      * @param errorCause  异常原因
      */
-    public AbstractException(Throwable throwable, String sMessage, int nStatusCode, String errorCause) {
+    protected AbstractException(Throwable throwable, String sMessage, int nStatusCode, String errorCause) {
         super(throwable, sMessage, nStatusCode, errorCause);
     }
 
@@ -32,7 +32,7 @@ public abstract class AbstractException extends ZuulException {
      * @param nStatusCode 异常码
      * @param errorCause  异常原因
      */
-    public AbstractException(String sMessage, int nStatusCode, String errorCause) {
+    protected AbstractException(String sMessage, int nStatusCode, String errorCause) {
         super(sMessage, nStatusCode, errorCause);
     }
 
@@ -43,7 +43,7 @@ public abstract class AbstractException extends ZuulException {
      * @param nStatusCode 异常码
      * @param errorCause  异常原因
      */
-    public AbstractException(Throwable throwable, int nStatusCode, String errorCause) {
+    protected AbstractException(Throwable throwable, int nStatusCode, String errorCause) {
         super(throwable, nStatusCode, errorCause);
     }
 }

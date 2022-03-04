@@ -68,7 +68,7 @@ public abstract class AbstractBusinessEventPublisher implements BusinessEventPub
     @Override
     public void publishEvent(AbstractBusinessEvent event) {
         for (BusinessEventListener businessEventListener : businessEventListenerSet) {
-            threadPoolExecutor.execute(() -> businessEventListener.handleBusinessEventWithoutReturn(event));
+            threadPoolExecutor.execute(() -> businessEventListener.handleBusinessEventWithoutResult(event));
         }
     }
 

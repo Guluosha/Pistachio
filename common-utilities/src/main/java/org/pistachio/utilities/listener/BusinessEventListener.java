@@ -19,7 +19,7 @@ public interface BusinessEventListener extends EventListener {
      *
      * @param businessEvent 业务事件
      */
-    void handleBusinessEventWithoutReturn(AbstractBusinessEvent businessEvent);
+    void handleBusinessEventWithoutResult(AbstractBusinessEvent businessEvent);
 
     /**
      * 处理业务事件并返回结果（泛型）
@@ -28,6 +28,6 @@ public interface BusinessEventListener extends EventListener {
      * @param <T>           结果（泛型）
      * @return T，泛型
      */
-    <T> T handleBusinessEvent(AbstractBusinessEvent businessEvent);
+    <T> T handleBusinessEventWithResult(AbstractBusinessEvent businessEvent);
 
 }

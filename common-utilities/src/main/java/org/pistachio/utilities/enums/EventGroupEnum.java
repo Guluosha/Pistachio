@@ -36,9 +36,9 @@ public enum EventGroupEnum {
      */
     MERCHANT_GROUP("MerchantGroup", 4);
 
-    private String eventGroupName;
+    private final String eventGroupName;
 
-    private Integer eventGroupNumber;
+    private final Integer eventGroupNumber;
 
     EventGroupEnum(String eventGroupName, Integer eventGroupNumber) {
         this.eventGroupName = eventGroupName;

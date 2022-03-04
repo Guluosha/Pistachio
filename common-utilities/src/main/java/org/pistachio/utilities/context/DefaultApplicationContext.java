@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.pistachio.utilities.listener.BusinessEventListener;
 import org.pistachio.utilities.publisher.DefaultBusinessEventPublisher;
-import org.pistachio.utilities.utils.NormalThreadFactory;
+import org.pistachio.utilities.utils.NormalThreadFactoryUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.lang.NonNull;
 
 import java.util.Map;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -31,7 +32,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Slf4j
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 @Configuration
-@ComponentScan(basePackages = {"org.pistachio.*.**"})
+@ComponentScan(basePackages = {"org.pistachio.*.*"})
 public class DefaultApplicationContext implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
@@ -44,7 +45,7 @@ public class DefaultApplicationContext implements ApplicationContextAware {
     @Bean(name = {"normalThreadFactory"})
     @Scope(scopeName = ConfigurableBeanFactory.SCOPE_SINGLETON)
     ThreadFactory buildThreadFactory() {
-        return new NormalThreadFactory();
+        return NormalThreadFactoryUtils.builder().build();
     }
 
     @Bean(name = "defaultBusinessEventPublisher")
@@ -67,7 +68,7 @@ public class DefaultApplicationContext implements ApplicationContextAware {
     }
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
 

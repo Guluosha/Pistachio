@@ -86,7 +86,7 @@ public enum BusinessTypeEnum {
      */
     USER_BUSINESS(15);
 
-    private Integer businessTypeSerialNumber;
+    private final Integer businessTypeSerialNumber;
 
     BusinessTypeEnum(Integer businessTypeSerialNumber) {
         this.businessTypeSerialNumber = businessTypeSerialNumber;
@@ -109,9 +109,7 @@ public enum BusinessTypeEnum {
                     return businessTypeEnum;
                 }
             }
-            return null;
-        } else {
-            return null;
         }
+        return null;
     }
 }

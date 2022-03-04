@@ -13,16 +13,11 @@ import java.util.EventObject;
 
 public abstract class AbstractBusinessEvent extends EventObject {
 
-    private Integer status;
+    protected long timeStamp;
 
-    /**
-     * Constructs a prototypical Event.
-     *
-     * @param abstractBusinessEventSource The object on which the Event initially occurred.
-     * @throws IllegalArgumentException if source is null.
-     */
-    public AbstractBusinessEvent(AbstractBusinessEventSource abstractBusinessEventSource) {
-        super(abstractBusinessEventSource);
+    protected AbstractBusinessEvent(Object source) {
+        super(source);
+        timeStamp = System.currentTimeMillis();
     }
 
     /**
@@ -30,14 +25,8 @@ public abstract class AbstractBusinessEvent extends EventObject {
      *
      * @return String，事件名
      */
-    public abstract String getCurrentEventName();
-
-    public Integer getStatus() {
-        return status;
+    protected String getEventName() {
+        return this.getClass().getSimpleName();
     }
 
-    public AbstractBusinessEvent setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
 }
