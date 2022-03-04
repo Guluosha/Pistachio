@@ -11,13 +11,17 @@ import java.util.EventObject;
  * @date 2019/5/3 ~ 下午 11:58
  */
 
-public abstract class AbstractBusinessEvent extends EventObject {
+public abstract class AbstractBusinessEvent<T> extends EventObject {
 
-    protected long timeStamp;
+    private final long timeStamp;
 
-    protected AbstractBusinessEvent(Object source) {
+    protected AbstractBusinessEvent(T source) {
         super(source);
-        timeStamp = System.currentTimeMillis();
+        this.timeStamp = System.currentTimeMillis();
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
     }
 
     /**
@@ -25,8 +29,6 @@ public abstract class AbstractBusinessEvent extends EventObject {
      *
      * @return String，事件名
      */
-    protected String getEventName() {
-        return this.getClass().getSimpleName();
-    }
+    protected abstract String getEventName();
 
 }
