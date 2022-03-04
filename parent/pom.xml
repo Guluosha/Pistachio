@@ -40,6 +40,7 @@
         <compiler.version>3.7.0</compiler.version>
         <lombok.version>1.18.20</lombok.version>
         <swagger2.version>3.0.0</swagger2.version>
+        <joda-time.version>2.10.13</joda-time.version>
     </properties>
 
     <!-- 依赖版本同意管理 -->
@@ -175,6 +176,12 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>${swagger2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
         </dependency>
     </dependencies>
 
