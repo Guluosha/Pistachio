@@ -24,7 +24,7 @@ public enum MessageChannelNameEnum {
     /**
      * 订单消息通道
      */
-    MESSAGE_CHANNEL_NAME_ENUM("OrderMessageOutputChannel");
+    ORDER_MESSAGE_OUTPUT_CHANNEL("OrderMessageOutputChannel");
 
     private final String name;
 
