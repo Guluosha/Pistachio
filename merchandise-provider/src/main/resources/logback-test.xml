@@ -6,12 +6,14 @@ debug:当此属性设置为true时，将打印出logback内部日志信息，实
 -->
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
     <contextName>defaultContext</contextName>
-
     <property name="logPath" value="${logPath:-./logDir}"/>
+    <property name="logLevel" value="${logLevel:-INFO}"/>
+    <property name="queueSize" value="${queueSize:-8192}"/>
     <property name="debugFileName" value="DEBUG"/>
     <property name="infoFileName" value="INFO"/>
+    <property name="warnFileName" value="WARN"/>
     <property name="errorFileName" value="ERROR"/>
-    <property name="logPatternDefault" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %logger{0} [%X{UUID}] %msg%n"/>
+    <property name="defaultLogPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %logger{0} [%X{UUID}] %msg%n"/>
     <!--<property name="logPatternConsole" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%boldYellow(%thread)] [%highlight(%-5level)] %boldGreen(%logger{0}) %msg%n"/>-->
     <!--<property name="logPatternFile" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger{0} %msg%n"/>-->
 
@@ -21,7 +23,7 @@ debug:当此属性设置为true时，将打印出logback内部日志信息，实
             <level>DEBUG</level>
         </filter>
         <encoder>
-            <pattern>${logPatternDefault}</pattern>
+            <pattern>${defaultLogPattern}</pattern>
         </encoder>
     </appender>
 
@@ -35,7 +37,7 @@ debug:当此属性设置为true时，将打印出logback内部日志信息，实
             <level>DEBUG</level>
         </filter>
         <encoder>
-            <pattern>${logPatternDefault}</pattern>
+            <pattern>${defaultLogPattern}</pattern>
         </encoder>
     </appender>
     <appender name="infoFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -44,13 +46,26 @@ debug:当此属性设置为true时，将打印出logback内部日志信息，实
             <fileNamePattern>${logPath}/%d{yyyy-MM-dd,aux}/${infoFileName}-%d{HH}.log</fileNamePattern>
             <!--<maxHistory>24</maxHistory>-->
         </rollingPolicy>
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>${defaultLogPattern}</pattern>
+        </encoder>
+    </appender>
+    <appender name="warnFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/${warnFileName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/%d{yyyy-MM-dd,aux}/${warnFileName}-%d{HH}.log</fileNamePattern>
+            <!--<maxHistory>24</maxHistory>-->
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
         <encoder>
-            <pattern>${logPatternDefault}</pattern>
+            <pattern>${defaultLogPattern}</pattern>
         </encoder>
     </appender>
     <appender name="errorFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -65,14 +80,36 @@ debug:当此属性设置为true时，将打印出logback内部日志信息，实
             <onMismatch>DENY</onMismatch>
         </filter>
         <encoder>
-            <pattern>${logPatternDefault}</pattern>
+            <pattern>${defaultLogPattern}</pattern>
         </encoder>
     </appender>
 
-    <root level="INFO">
-        <appender-ref ref="consoleAppender"/>
+    <appender name="debugAsyncFileAppender" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${queueSize}</queueSize>
+        <discardingThreshold>0</discardingThreshold>
         <appender-ref ref="debugFileAppender"/>
+    </appender>
+    <appender name="infoAsyncFileAppender" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${queueSize}</queueSize>
+        <discardingThreshold>0</discardingThreshold>
         <appender-ref ref="infoFileAppender"/>
+    </appender>
+    <appender name="warnAsyncFileAppender" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${queueSize}</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="warnFileAppender"/>
+    </appender>
+    <appender name="errorAsyncFileAppender" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${queueSize}</queueSize>
+        <discardingThreshold>0</discardingThreshold>
         <appender-ref ref="errorFileAppender"/>
+    </appender>
+
+    <root level="${logLevel}">
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="debugAsyncFileAppender"/>
+        <appender-ref ref="infoAsyncFileAppender"/>
+        <appender-ref ref="warnAsyncFileAppender"/>
+        <appender-ref ref="errorAsyncFileAppender"/>
     </root>
 </configuration>
