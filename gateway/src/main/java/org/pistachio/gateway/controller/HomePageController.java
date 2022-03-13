@@ -4,7 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.pistachio.gateway.constants.ResponseCodeConstants;
-import org.pistachio.utilities.component.Result;
+import org.pistachio.utilities.wrapper.Result;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +28,7 @@ public class HomePageController {
     public Result<String> homePage() {
         return Result.<String>builder()
                 .code(ResponseCodeConstants.OK)
-                .msg("成功")
+                .message("成功")
                 .data("这个网关").build();
     }
 }

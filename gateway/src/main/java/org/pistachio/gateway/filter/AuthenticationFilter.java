@@ -5,8 +5,8 @@ import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
 import org.pistachio.gateway.constants.CustomRequestHeaderConstants;
+import org.pistachio.utilities.constants.SymbolConstant;
 import org.pistachio.utilities.enums.ServiceNameEnum;
-import org.pistachio.utilities.enums.constants.SeparatorEnums;
 import org.pistachio.utilities.exception.BadRequestException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -69,7 +69,7 @@ public class AuthenticationFilter extends ZuulFilter {
     public boolean shouldFilter() {
         RequestContext currentContext = RequestContext.getCurrentContext();
         String requestUri = currentContext.getRequest().getRequestURI();
-        String[] urlFieldArray = requestUri.split(SeparatorEnums.URL_SEPARATOR.getString());
+        String[] urlFieldArray = requestUri.split(SymbolConstant.SLASH);
         for (String urlField : urlFieldArray) {
             if (StringUtils.isEmpty(StringUtils.trimAllWhitespace(urlField))) {
                 continue;

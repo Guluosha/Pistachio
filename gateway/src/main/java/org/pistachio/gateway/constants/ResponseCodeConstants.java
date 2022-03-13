@@ -14,19 +14,19 @@ public interface ResponseCodeConstants {
     /**
      * 200范围
      */
-    int OK = 200;
+    String OK = "200";
 
     /**
      * 300范围
      */
-    int REDIRECT = 302;
+    String REDIRECT = "302";
 
     /**
      * 400范围
      */
-    int BAD_REQUEST = 400;
-    int UN_AUTHORIZED = 401;
-    int UN_AUTHENTICATION = 403;
-    int NOT_FOUND = 404;
+    String BAD_REQUEST = "400";
+    String UN_AUTHORIZED = "401";
+    String UN_AUTHENTICATION = "403";
+    String NOT_FOUND = "404";
 
 }
