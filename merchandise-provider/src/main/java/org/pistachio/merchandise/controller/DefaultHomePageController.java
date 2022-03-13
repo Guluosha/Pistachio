@@ -1,7 +1,11 @@
 package org.pistachio.merchandise.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.pistachio.merchandise.event.MerchandiseAuditEvent;
+import org.pistachio.merchandise.publisher.DefaultMerchandiseEventPublisher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,9 +21,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DefaultHomePageController {
 
+    @Autowired
+    private DefaultMerchandiseEventPublisher eventPublisher;
+
     @GetMapping(path = {"/"})
-    String wellComePage(@RequestParam(name = "name") String name) {
+    public String wellComePage(@RequestParam(name = "name") String name) {
         log.info("返回请求：");
         return "欢迎";
+    }
+
+    @GetMapping(path = {"/audit/{merchandiseName}"})
+    public String auditMerchandise(@PathVariable(name = "merchandiseName") String merchandiseName) {
+        eventPublisher.publishEvent(new MerchandiseAuditEvent(merchandiseName));
+        eventPublisher.publishEvent(null);
+        return merchandiseName;
     }
 }

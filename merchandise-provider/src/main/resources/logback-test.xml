@@ -13,7 +13,7 @@ debug:当此属性设置为true时，将打印出logback内部日志信息，实
     <property name="infoFileName" value="INFO"/>
     <property name="warnFileName" value="WARN"/>
     <property name="errorFileName" value="ERROR"/>
-    <property name="defaultLogPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %logger{0} [%X{UUID}] %msg%n"/>
+    <property name="defaultLogPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [线程:%thread] [类:%logger{0}:%line-行] [方法:%method] [链路标识:%X{UUID}] %msg%n"/>
     <!--<property name="logPatternConsole" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%boldYellow(%thread)] [%highlight(%-5level)] %boldGreen(%logger{0}) %msg%n"/>-->
     <!--<property name="logPatternFile" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger{0} %msg%n"/>-->
 
