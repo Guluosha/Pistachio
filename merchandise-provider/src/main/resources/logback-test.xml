@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+scan: 当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
+scanPeriod: 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。
+debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值false。
+-->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <contextName>defaultContext</contextName>
+
+    <property name="logPath" value="${logPath:-./logDir}"/>
+    <property name="debugFileName" value="DEBUG"/>
+    <property name="infoFileName" value="INFO"/>
+    <property name="errorFileName" value="ERROR"/>
+    <property name="logPatternDefault" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %logger{0} [%X{UUID}] %msg%n"/>
+    <!--<property name="logPatternConsole" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%boldYellow(%thread)] [%highlight(%-5level)] %boldGreen(%logger{0}) %msg%n"/>-->
+    <!--<property name="logPatternFile" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger{0} %msg%n"/>-->
+
+    <!-- 控制台日志输出 -->
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <pattern>${logPatternDefault}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 日志文件输出 -->
+    <appender name="debugFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/${debugFileName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/%d{yyyy-MM-dd,aux}/${debugFileName}-%d{HH}.log</fileNamePattern>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <pattern>${logPatternDefault}</pattern>
+        </encoder>
+    </appender>
+    <appender name="infoFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/${infoFileName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/%d{yyyy-MM-dd,aux}/${infoFileName}-%d{HH}.log</fileNamePattern>
+            <!--<maxHistory>24</maxHistory>-->
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${logPatternDefault}</pattern>
+        </encoder>
+    </appender>
+    <appender name="errorFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/${errorFileName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/%d{yyyy-MM-dd,aux}/${errorFileName}-%d{HH}.log</fileNamePattern>
+            <!--<maxHistory>24</maxHistory>-->
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${logPatternDefault}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="debugFileAppender"/>
+        <appender-ref ref="infoFileAppender"/>
+        <appender-ref ref="errorFileAppender"/>
+    </root>
+</configuration>
