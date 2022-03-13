@@ -1,8 +1,11 @@
 package org.pistachio.utilities.publisher.base;
 
 import com.google.common.collect.Sets;
+import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import lombok.extern.slf4j.Slf4j;
 import org.pistachio.utilities.event.AbstractBusinessEvent;
-import org.pistachio.utilities.listener.BusinessEventListener;
+import org.pistachio.utilities.listener.AbstractBusinessEventListener;
 import org.pistachio.utilities.listener.ExceptionHandler;
 
 import java.util.Set;
@@ -15,49 +18,74 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @author lipeiheng 2020/3/18 ~ 上午 12:43
  */
 
+@Slf4j
+@Data
+@SuperBuilder
 public abstract class AbstractBusinessEventPublisher implements BusinessEventPublisher {
 
-    protected Set<BusinessEventListener> businessEventListenerSet = Sets.newConcurrentHashSet();
-
-    protected ExceptionHandler exceptionHandler;
-
-    protected ThreadPoolExecutor threadPoolExecutor;
+    /**
+     * 业务事件监听器集合
+     */
+    protected final Set<AbstractBusinessEventListener> businessEventListenerSet = Sets.newConcurrentHashSet();
 
     /**
-     * 设置线程池
-     *
-     * @param threadPoolExecutor 线程池对象
+     * 异常处理类
      */
-    protected abstract void setThreadPoolExecutor(ThreadPoolExecutor threadPoolExecutor);
+    protected ExceptionHandler exceptionHandler;
+
+    /**
+     * 线程池
+     */
+    protected ThreadPoolExecutor threadPoolExecutor;
 
     /**
      * 添加事件监听器
      *
-     * @param listener 监听器
+     * @param eventListener 监听器
      */
-    @Override
-    public void registerEventListener(BusinessEventListener listener) {
-        businessEventListenerSet.add(listener);
+    public void registerEventListener(AbstractBusinessEventListener eventListener) {
+        log.info("注册业务事件监听器:{}", eventListener);
+        businessEventListenerSet.add(eventListener);
     }
 
     /**
      * 移除事件监听器
      *
-     * @param listener 监听器
+     * @param eventListener 监听器
      */
-    @Override
-    public void removeEventListener(BusinessEventListener listener) {
-        businessEventListenerSet.remove(listener);
+    public void removeEventListener(AbstractBusinessEventListener eventListener) {
+        log.info("注销业务事件监听器:{}", eventListener);
+        businessEventListenerSet.remove(eventListener);
     }
 
     /**
      * 移除所有事件监听器
      */
-    @Override
     public void removeAllEventListener() {
         if (!businessEventListenerSet.isEmpty()) {
             businessEventListenerSet.clear();
+            log.info("注销所有业务事件监听器");
         }
+    }
+
+    /**
+     * 注册事件监听器集合
+     *
+     * @param eventListenerSet 监听器集合
+     */
+    public void registerEventListenerSet(Set<AbstractBusinessEventListener> eventListenerSet) {
+        log.info("注册业务事件监听器集合:{}", eventListenerSet);
+        this.businessEventListenerSet.addAll(eventListenerSet);
+    }
+
+    /**
+     * 注销监听器集合
+     *
+     * @param eventListenerSet 监听器集合
+     */
+    public void removeEventListenerSet(Set<AbstractBusinessEventListener> eventListenerSet) {
+        log.info("注销业务事件监听器集合:{}", eventListenerSet);
+        this.businessEventListenerSet.removeAll(eventListenerSet);
     }
 
     /**
@@ -67,8 +95,15 @@ public abstract class AbstractBusinessEventPublisher implements BusinessEventPub
      */
     @Override
     public void publishEvent(AbstractBusinessEvent event) {
-        for (BusinessEventListener businessEventListener : businessEventListenerSet) {
-            threadPoolExecutor.execute(() -> businessEventListener.handleBusinessEventWithoutResult(event));
+        for (AbstractBusinessEventListener businessEventListener : businessEventListenerSet) {
+            threadPoolExecutor.execute(() -> {
+                try {
+                    log.info("业务事件监听器:{}开始处理事件:{}", businessEventListener, event);
+                    businessEventListener.onBusinessEvent(event);
+                } catch (Exception exception) {
+                    log.error("处理事件异常", exception);
+                }
+            });
         }
     }
 

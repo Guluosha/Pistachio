@@ -1,18 +1,15 @@
 package org.pistachio.utilities.context;
 
-import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
-import org.pistachio.utilities.listener.BusinessEventListener;
+import org.pistachio.utilities.listener.AbstractBusinessEventListener;
 import org.pistachio.utilities.publisher.DefaultBusinessEventPublisher;
 import org.pistachio.utilities.utils.NormalThreadFactoryUtils;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 import org.springframework.lang.NonNull;
 
 import java.util.Map;
@@ -30,40 +27,36 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 
 @Slf4j
-@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 @Configuration
 @ComponentScan(basePackages = {"org.pistachio.*.*"})
 public class DefaultApplicationContext implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
-    @Bean(name = {"scheduledThreadPoolExecutor"})
-    ScheduledThreadPoolExecutor initializeScheduledThreadPoolExecutor() {
-        return new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), buildThreadFactory(), buildRejectedExecutionHandler());
+    @Bean
+    public static ScheduledThreadPoolExecutor scheduledThreadPoolExecutor() {
+        return new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors(), normalThreadFactory(), rejectedExecutionHandler());
     }
 
-    @Bean(name = {"normalThreadFactory"})
-    @Scope(scopeName = ConfigurableBeanFactory.SCOPE_SINGLETON)
-    ThreadFactory buildThreadFactory() {
+    @Bean
+    public static ThreadFactory normalThreadFactory() {
         return NormalThreadFactoryUtils.builder().build();
     }
 
-    @Bean(name = "defaultBusinessEventPublisher")
-    @Scope(scopeName = ConfigurableBeanFactory.SCOPE_SINGLETON)
-    DefaultBusinessEventPublisher initDefaultBusinessPublisher() {
+    @Bean
+    public DefaultBusinessEventPublisher defaultBusinessEventPublisher() {
         DefaultBusinessEventPublisher defaultBusinessEventPublisher = DefaultBusinessEventPublisher.builder()
-                .businessEventListenerSet(Sets.newHashSet())
-                .threadPoolExecutor(initializeScheduledThreadPoolExecutor())
-                .build();
-        Map<String, BusinessEventListener> beansOfType = applicationContext.getBeansOfType(BusinessEventListener.class);
-        for (String beanName : beansOfType.keySet()) {
-            defaultBusinessEventPublisher.registerEventListener(applicationContext.getBean(beanName, BusinessEventListener.class));
-        }
+                .threadPoolExecutor(scheduledThreadPoolExecutor()).build();
+        Map<String, AbstractBusinessEventListener> beansOfType = applicationContext.getBeansOfType(AbstractBusinessEventListener.class);
+        beansOfType.forEach((beanName, businessEventListener) -> {
+            log.info("注册事件监听器,beanName:{}", beanName);
+            defaultBusinessEventPublisher.registerEventListener(businessEventListener);
+        });
         return defaultBusinessEventPublisher;
     }
 
     @Bean
-    ThreadPoolExecutor.CallerRunsPolicy buildRejectedExecutionHandler() {
+    public static ThreadPoolExecutor.CallerRunsPolicy rejectedExecutionHandler() {
         return new ThreadPoolExecutor.CallerRunsPolicy();
     }
 

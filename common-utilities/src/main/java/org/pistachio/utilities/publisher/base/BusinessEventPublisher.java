@@ -1,7 +1,6 @@
 package org.pistachio.utilities.publisher.base;
 
 import org.pistachio.utilities.event.AbstractBusinessEvent;
-import org.pistachio.utilities.listener.BusinessEventListener;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -12,25 +11,6 @@ import org.pistachio.utilities.listener.BusinessEventListener;
  */
 
 public interface BusinessEventPublisher {
-
-    /**
-     * 添加事件监听器
-     *
-     * @param listener 监听器
-     */
-    void registerEventListener(BusinessEventListener listener);
-
-    /**
-     * 移除事件监听器
-     *
-     * @param listener 监听器
-     */
-    void removeEventListener(BusinessEventListener listener);
-
-    /**
-     * 移除所有事件监听器
-     */
-    void removeAllEventListener();
 
     /**
      * 发布事件

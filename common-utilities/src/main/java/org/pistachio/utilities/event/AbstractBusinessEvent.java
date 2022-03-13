@@ -1,5 +1,7 @@
 package org.pistachio.utilities.event;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.EventObject;
 
 /**
@@ -11,16 +13,25 @@ import java.util.EventObject;
  * @date 2019/5/3 ~ 下午 11:58
  */
 
-public abstract class AbstractBusinessEvent<T> extends EventObject {
+@Slf4j
+public abstract class AbstractBusinessEvent extends EventObject {
 
+    /**
+     * 事件创建时的时间戳
+     */
     private final long timeStamp;
 
-    protected AbstractBusinessEvent(T source) {
-        super(source);
-        this.timeStamp = System.currentTimeMillis();
+    /**
+     * 构造器
+     *
+     * @param eventContent 事件内容
+     */
+    protected AbstractBusinessEvent(Object eventContent) {
+        super(eventContent);
+        timeStamp = System.currentTimeMillis();
     }
 
-    public long getTimeStamp() {
+    protected long getTimeStamp() {
         return timeStamp;
     }
 
