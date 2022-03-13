@@ -3,7 +3,11 @@ package org.pistachio.merchandise.listener;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import org.pistachio.merchandise.event.MerchandiseAuditEvent;
 import org.pistachio.merchandise.listener.base.AbstractMerchandiseBusinessEventListener;
+import org.pistachio.utilities.event.AbstractBusinessEvent;
+import org.pistachio.utilities.exception.AbstractBusinessException;
+import org.pistachio.utilities.exception.AbstractBusinessRuntimeException;
 import org.springframework.stereotype.Component;
 
 /**
@@ -28,5 +32,22 @@ public class MerchandiseAuditEventListener extends AbstractMerchandiseBusinessEv
     @Override
     protected String getBusinessEventListenerName() {
         return this.getClass().getName();
+    }
+
+    /**
+     * 处理业务事件
+     *
+     * @param businessEvent 业务事件
+     * @throws AbstractBusinessException        业务异常基类
+     * @throws AbstractBusinessRuntimeException 运行时业务异常基类
+     */
+    @Override
+    public void onBusinessEvent(AbstractBusinessEvent businessEvent)
+            throws AbstractBusinessException, AbstractBusinessRuntimeException {
+        if (!(businessEvent instanceof MerchandiseAuditEvent)) {
+            return;
+        }
+        String merchandiseName = (String) businessEvent.getSource();
+        log.info("审核的商品名：{}", merchandiseName);
     }
 }

@@ -25,7 +25,7 @@ public class MerchandiseAuditEvent extends AbstractMerchandiseEvent {
     }
 
     @Override
-    protected String getEventName() {
+    public String getEventName() {
         return "商品-审核事件";
     }
 
