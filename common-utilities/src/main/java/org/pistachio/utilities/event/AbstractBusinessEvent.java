@@ -40,6 +40,6 @@ public abstract class AbstractBusinessEvent extends EventObject {
      *
      * @return String，事件名
      */
-    protected abstract String getEventName();
+    public abstract String getEventName();
 
 }

@@ -31,7 +31,7 @@ public class DefaultBusinessEvent extends AbstractBusinessEvent {
      * @return String，事件名
      */
     @Override
-    protected String getEventName() {
+    public String getEventName() {
         return DefaultBusinessEvent.class.getName();
     }
 }

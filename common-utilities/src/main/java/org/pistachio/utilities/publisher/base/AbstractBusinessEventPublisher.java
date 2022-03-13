@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.pistachio.utilities.event.AbstractBusinessEvent;
 import org.pistachio.utilities.listener.AbstractBusinessEventListener;
 import org.pistachio.utilities.listener.ExceptionHandler;
@@ -98,7 +99,11 @@ public abstract class AbstractBusinessEventPublisher implements BusinessEventPub
         for (AbstractBusinessEventListener businessEventListener : businessEventListenerSet) {
             threadPoolExecutor.execute(() -> {
                 try {
-                    log.info("业务事件监听器:{}开始处理事件:{}", businessEventListener, event);
+                    if (event == null || event.getSource() == null) {
+                        log.warn("业务事件为空!，不发布任何业务事件信息");
+                        return;
+                    }
+                    log.info("业务事件监听器:{},开始处理事件:{}", businessEventListener.getClass().getName(), StringUtils.isBlank(event.getEventName()) ? event : event.getEventName());
                     businessEventListener.onBusinessEvent(event);
                 } catch (Exception exception) {
                     log.error("处理事件异常", exception);
