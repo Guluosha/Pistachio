@@ -25,8 +25,6 @@
         <!-- Spring全家桶依赖版本 -->
         <spring.cloud.version>Hoxton.SR10</spring.cloud.version>
         <spring.cloud-boot.version>2.3.9.RELEASE</spring.cloud-boot.version>
-        <!--        <spring.cloud.version>2020.0.0</spring.cloud.version>-->
-        <!--        <spring.cloud-boot.version>2.4.0</spring.cloud-boot.version>-->
         <spring.cloud.alibaba.version>2.2.1.RELEASE</spring.cloud.alibaba.version>
         <spring.cloud.alibaba-boot.version>1.0.0</spring.cloud.alibaba-boot.version>
         <mysql-connector-java.version>8.0.16</mysql-connector-java.version>
@@ -36,7 +34,7 @@
         <sharding-jdbc.version>2.0.3</sharding-jdbc.version>
         <sharding-jdbc-orchestration>3.1.0</sharding-jdbc-orchestration>
         <LocalMavenRepositoryPath>D:\MavenRepository</LocalMavenRepositoryPath>
-        <jdk.version>1.11</jdk.version>
+        <jdk.version>8</jdk.version>
         <compiler.version>3.7.0</compiler.version>
         <lombok.version>1.18.20</lombok.version>
         <swagger2.version>3.0.0</swagger2.version>
@@ -253,30 +251,6 @@
                     <detail>true</detail>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadoc</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>javadoc</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <show>public</show>
-                    <charset>UTF-8</charset>
-                    <encoding>UTF-8</encoding>
-                    <docencoding>UTF-8</docencoding>
-                    <doclint>none</doclint>
-                    <links>
-                        <link>http://docs.oracle.com/javase/8/docs/api</link>
-                    </links>
-                </configuration>
-            </plugin>
             <!-- surefire（测试）插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -286,45 +260,6 @@
                     <skipTests>true</skipTests>
                 </configuration>
             </plugin>
-            <!--<plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.1.9.RELEASE</version>
-                <configuration>
-                    <finalName>${project.artifactId}-${project.version}</finalName>
-                    <outputDirectory>${project.basedir}/src/main/docker</outputDirectory>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
-            <!--<plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <executions>
-                    <execution>
-                        <id>build-tag-push-image</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>tag</goal>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <detail>true</detail>
-                    <registryUrl>localhost:65535</registryUrl>
-                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
-                    <imageName>localhost:65535/${project.artifactId}:${project.version}</imageName>
-                </configuration>
-            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -335,12 +270,6 @@
                     <excludes>
                         <exclude>rebel*.xml</exclude>
                     </excludes>
-                    <!--<archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                        </manifest>
-                    </archive>-->
                     <archive>
                         <manifest>
                             <addClasspath/>
