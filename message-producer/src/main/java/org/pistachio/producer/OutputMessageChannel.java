@@ -13,9 +13,9 @@ import org.springframework.cloud.stream.messaging.Source;
 
 public interface OutputMessageChannel extends Source {
 
-    String LOGISTIC_MESSAGE_OUTPUT_CHANNEL = MessageChannelNameEnum.LogisticMessageOutputChannel.getName();
+    String LOGISTIC_MESSAGE_OUTPUT_CHANNEL = MessageChannelNameEnum.LOGISTIC_MESSAGE_OUTPUT_CHANNEL.getName();
 
-    String MERCHANDISE_OUTPUT_CHANNEL = MessageChannelNameEnum.MerchandiseOutputChannel.getName();
+    String MERCHANDISE_OUTPUT_CHANNEL = MessageChannelNameEnum.MERCHANDISE_OUTPUT_CHANNEL.getName();
 
-    String ORDER_MESSAGE_OUTPUT_CHANNEL = MessageChannelNameEnum.OrderMessageOutputChannel.getName();
+    String ORDER_MESSAGE_OUTPUT_CHANNEL = MessageChannelNameEnum.ORDER_MESSAGE_OUTPUT_CHANNEL.getName();
 }
