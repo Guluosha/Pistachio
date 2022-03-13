@@ -1,7 +1,9 @@
 package org.pistachio.merchandise.event;
 
-import org.pistachio.utilities.event.AbstractBusinessEvent;
-import org.pistachio.utilities.event.AbstractBusinessEventSource;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.pistachio.merchandise.event.base.AbstractMerchandiseEvent;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -11,25 +13,20 @@ import org.pistachio.utilities.event.AbstractBusinessEventSource;
  * @date 2019/5/4 ~ 下午 6:16
  */
 
-public class MerchandiseAuditEvent extends AbstractBusinessEvent {
+@Slf4j
+public class MerchandiseAuditEvent extends AbstractMerchandiseEvent {
 
-    /**
-     * Constructs a prototypical Event.
-     *
-     * @param abstractBusinessEventSource The object on which the Event initially occurred.
-     * @throws IllegalArgumentException if source is null.
-     */
-    public MerchandiseAuditEvent(AbstractBusinessEventSource abstractBusinessEventSource) {
-        super(abstractBusinessEventSource);
+    @Getter
+    @Setter
+    private Long id;
+
+    public MerchandiseAuditEvent(String eventContent) {
+        super(eventContent);
     }
 
-    /**
-     * 获取事件名
-     *
-     * @return String，事件名
-     */
     @Override
-    public String getCurrentEventName() {
-        return this.getClass().getName();
+    protected String getEventName() {
+        return "商品-审核事件";
     }
+
 }

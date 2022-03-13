@@ -1,12 +1,9 @@
 package org.pistachio.merchandise.listener;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import org.pistachio.merchandise.event.MerchandiseAuditEvent;
-import org.pistachio.merchandise.eventsource.MerchandiseAuditEventSource;
-import org.pistachio.utilities.event.AbstractBusinessEvent;
-import org.pistachio.utilities.listener.BusinessEventListener;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
+import org.pistachio.merchandise.listener.base.AbstractMerchandiseBusinessEventListener;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,35 +14,19 @@ import org.springframework.stereotype.Component;
  * @date 2019/5/31 ~ 下午 6:48
  */
 
+@EqualsAndHashCode(callSuper = true)
+@Slf4j
 @Data
-@Builder
-@AllArgsConstructor
 @Component
-public class MerchandiseAuditEventListener implements BusinessEventListener {
+public class MerchandiseAuditEventListener extends AbstractMerchandiseBusinessEventListener {
 
     /**
-     * 处理业务事件
+     * 获取事件监听器名
      *
-     * @param businessEvent 业务事件
+     * @return {@link String}，事件监听器名
      */
     @Override
-    public void handleBusinessEventWithoutReturn(AbstractBusinessEvent businessEvent) {
-        MerchandiseAuditEvent merchandiseAuditVoEvent = (MerchandiseAuditEvent) businessEvent;
-        Object merchandiseAuditVo = merchandiseAuditVoEvent.getSource();
-        if (merchandiseAuditVo instanceof MerchandiseAuditEventSource) {
-            System.out.println("\n\n##################################\n以下是商品审核事件监听器输出：\n");
-            System.out.println("\n##################################\n\n");
-        }
-    }
-
-    /**
-     * 处理业务事件并返回结果（泛型）
-     *
-     * @param businessEvent 业务事件
-     * @return T，泛型
-     */
-    @Override
-    public <T> T handleBusinessEvent(AbstractBusinessEvent businessEvent) {
-        return null;
+    protected String getBusinessEventListenerName() {
+        return this.getClass().getName();
     }
 }
