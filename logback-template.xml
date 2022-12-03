@@ -4,16 +4,16 @@ scan: 当此属性设置为true时，配置文件如果发生改变，将会被�
 scanPeriod: 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。
 debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值false。
 -->
-<configuration scan="true" scanPeriod="60 seconds" debug="false">
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
     <contextName>defaultContext</contextName>
-    <property name="logPath" value="${logPath:-./logDir}"/>
-    <property name="logLevel" value="${logLevel:-INFO}"/>
-    <property name="queueSize" value="${queueSize:-8192}"/>
+    <property name="logPath" value="${log.path:-./log-dir}"/>
+    <property name="logLevel" value="${log.level:-INFO}"/>
+    <property name="queueSize" value="${log.queueSize:-67108864}"/>
     <property name="debugFileName" value="DEBUG"/>
     <property name="infoFileName" value="INFO"/>
     <property name="warnFileName" value="WARN"/>
     <property name="errorFileName" value="ERROR"/>
-    <property name="defaultLogPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [线程:%thread] [类:%logger{0}:%line-行] [方法:%method] [链路标识:%X{UUID}] %msg%n"/>
+    <property name="defaultLogPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [线程:%thread] [类:%logger{0}:%line{0}-行] [方法:%method] [链路标识:[%X{UUID}]] %msg%n"/>
     <!--<property name="logPatternConsole" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%boldYellow(%thread)] [%highlight(%-5level)] %boldGreen(%logger{0}) %msg%n"/>-->
     <!--<property name="logPatternFile" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger{0} %msg%n"/>-->
 
