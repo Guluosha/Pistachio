@@ -15,20 +15,20 @@ public interface DateTimeFormatConstant {
     /**
      * “年-月-日”
      */
-    String YYYY_MM_DD = "yyyy-MM-dd";
+    String yyyyMMdd = "yyyy-MM-dd";
 
     /**
      * “时-分-秒”
      */
-    String HH_MM_SS = "HH:mm:ss";
+    String HHmmss = "HH:mm:ss";
 
     /**
      * “年-月-日 时-分-秒”
      */
-    String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+    String yyyyMMdd_HHmmss = "yyyy-MM-dd HH:mm:ss";
 
     /**
      * “年-月-日 时-分-秒-毫秒”
      */
-    String YYYY_MM_DD_HH_MM_SS_SSS = "yyyy-MM-dd HH:mm:ss:SSS";
+    String yyyyMMdd_HHmmssSSS = "yyyy-MM-dd HH:mm:ss:SSS";
 }
