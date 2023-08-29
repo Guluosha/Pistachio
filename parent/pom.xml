@@ -129,7 +129,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.58</version>
+            <version>1.2.83</version>
         </dependency>
 
         <!-- 测试框架依赖（集中测试框架都写上，用哪个随便） -->
