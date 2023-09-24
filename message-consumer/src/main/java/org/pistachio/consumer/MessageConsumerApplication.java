@@ -1,8 +1,10 @@
 package org.pistachio.consumer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 
@@ -15,12 +17,14 @@ import org.springframework.context.annotation.PropertySource;
  * @date 2018/12/16 ~ 下午 11:06
  */
 
+@Slf4j
+@EnableEurekaClient
 @SpringBootApplication
 @PropertySource(value = {"classpath*:*.yml"}, encoding = "utf-8", ignoreResourceNotFound = true)
 @ComponentScan(basePackages = {"org.pistachio.*"}, lazyInit = true)
 public class MessageConsumerApplication {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(MessageConsumerApplication.class).web(WebApplicationType.NONE).build().run(args);
+        new SpringApplicationBuilder(MessageConsumerApplication.class).web(WebApplicationType.SERVLET).build().run(args);
     }
 }

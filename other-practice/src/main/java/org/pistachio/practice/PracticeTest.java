@@ -15,9 +15,9 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @Slf4j
 @SpringBootApplication
-public class PracticeApplication {
+public class PracticeTest {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(PracticeApplication.class).web(WebApplicationType.SERVLET).build().run(args);
+        new SpringApplicationBuilder(PracticeTest.class).web(WebApplicationType.SERVLET).build().run(args);
     }
 }

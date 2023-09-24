@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.pistachio.utilities.enums.ServiceNameEnum;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -27,11 +26,10 @@ import java.util.Map;
  */
 
 @Slf4j
-@EnableZuulProxy
+@MapperScan
 @Configuration
 @ComponentScan(basePackages = {"org.pistachio.*"})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@MapperScan
 public class DefaultGatewayApplicationContext {
 
     private static final String API_PACKAGE = "org.pistachio.*";

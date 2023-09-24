@@ -2,8 +2,9 @@ package org.pistachio.registration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -14,7 +15,8 @@ import org.springframework.cloud.client.SpringCloudApplication;
  */
 
 @Slf4j
-@SpringCloudApplication
+@EnableEurekaServer
+@SpringBootApplication
 public class RegistrationCenterApplication {
 
     public static void main(String[] args) {

@@ -1,9 +1,9 @@
 package org.pistachio.activity;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 
@@ -15,15 +15,13 @@ import org.springframework.context.annotation.PropertySource;
  * @date 2018/12/17 ~ 上午 10:55
  */
 
+@Slf4j
 @SpringBootApplication
 @ComponentScan(basePackages = {"org.pistachio.*"}, lazyInit = true)
 @PropertySource(value = {"classpath:application.yml"}, encoding = "utf-8", ignoreResourceNotFound = true)
 public class ActivityApplication {
 
-	public static void main(String[] args) {
-		ConfigurableApplicationContext applicationContext = new SpringApplicationBuilder(ActivityApplication.class).web(WebApplicationType.NONE).build().run(args);
-		People bean = applicationContext.getBean(People.class);
-		System.out.println("##############################");
-		System.out.println(bean.getName());
-	}
+    public static void main(String[] args) {
+        new SpringApplicationBuilder(ActivityApplication.class).web(WebApplicationType.SERVLET).build().run(args);
+    }
 }

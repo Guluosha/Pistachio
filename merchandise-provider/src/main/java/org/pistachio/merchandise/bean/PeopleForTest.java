@@ -1,5 +1,8 @@
 package org.pistachio.merchandise.bean;
 
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.pistachio.utilities.validate.Survey;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,12 +13,16 @@ import org.springframework.stereotype.Component;
  * @date 2018/12/18 ~ 下午 5:22
  */
 
+@Data
+@Slf4j
 @Component
 public class PeopleForTest {
 
-	private String name;
+    @Survey(message = "查勘类型不对")
+    private String name;
 
-	private int age;
+    private int age;
 
-	private String gender;
+    @Survey(message = "年龄不对")
+    private String gender;
 }

@@ -17,8 +17,8 @@ import org.springframework.context.annotation.PropertySource;
 
 @Slf4j
 @EnableEurekaClient
-@PropertySource(value = {"classpath:application.yml"}, encoding = "utf-8")
 @SpringBootApplication
+@PropertySource(value = {"classpath:application.yml"}, encoding = "utf-8")
 public class SearchApplication {
 
     public static void main(String[] args) {

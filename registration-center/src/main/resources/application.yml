@@ -3,7 +3,10 @@ spring:
     name: registrationCenter
 server:
   address: localhost
-  port: 1024
+  port: 1100
+#  ssl:
+#    key-store-password: singlecycle
+#    key-store: classpath:singlecycle.biz.jks
 eureka:
   server:
     enable-self-preservation: true

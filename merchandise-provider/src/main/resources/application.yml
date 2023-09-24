@@ -3,9 +3,10 @@ spring:
     name: merchandise
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://rm-wz914f1tfy2x2191ndo.mysql.rds.aliyuncs.com:3306/pistachio
-    username: root
-    password: yn%@1131$ok
+    #    url: jdbc:mysql://rm-wz914f1tfy2x2191ndo.mysql.rds.aliyuncs.com:3306/pistachio
+    url: jdbc:mysql://www.singlecycle.biz:3306/db_role_00
+    username: singlecycle
+    password: singlecycle
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       pool-name: 数据库连接池--Hikari
@@ -15,7 +16,7 @@ spring:
       auto-commit: true
 server:
   address: localhost
-  port: 65535
+  port: 1102
   server-header: brand
 eureka:
   instance:
@@ -25,4 +26,4 @@ eureka:
     initial-status: up
   client:
     service-url:
-      defaultZone: http://${server.address}:1024/eureka
+      defaultZone: http://${server.address}:1100/eureka

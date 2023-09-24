@@ -27,6 +27,7 @@
             <outputDirectory>/</outputDirectory>
             <excludes>
                 <exclude>rebel*.xml</exclude>
+                <exclude>*log*.xml</exclude>
             </excludes>
             <includes>
                 <include>*.xml</include>
@@ -35,12 +36,12 @@
                 <include>*.yml</include>
             </includes>
         </fileSet>
-        <!--<fileSet>
+        <fileSet>
             <directory>${project.build.directory}/lib</directory>
             <outputDirectory>/lib</outputDirectory>
             <includes>
                 <include>*.jar</include>
             </includes>
-        </fileSet>-->
+        </fileSet>
     </fileSets>
 </assembly>

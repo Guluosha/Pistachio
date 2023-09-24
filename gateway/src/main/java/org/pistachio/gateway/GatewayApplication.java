@@ -2,8 +2,10 @@ package org.pistachio.gateway;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -15,10 +17,11 @@ import org.springframework.cloud.client.SpringCloudApplication;
  */
 
 @Slf4j
-@SpringCloudApplication
+@EnableEurekaClient
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class GatewayApplication {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(GatewayApplication.class).web(WebApplicationType.SERVLET).build().run(args);
+        new SpringApplicationBuilder(GatewayApplication.class).web(WebApplicationType.REACTIVE).build().run(args);
     }
 }

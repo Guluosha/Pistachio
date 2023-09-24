@@ -2,8 +2,9 @@ package org.pistachio.merchant;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 
@@ -16,9 +17,10 @@ import org.springframework.context.annotation.PropertySource;
  */
 
 @Slf4j
+@EnableEurekaClient
+@SpringBootApplication
 @ComponentScan(basePackages = {"org.pistachio.*"}, lazyInit = true)
 @PropertySource(value = {"classpath:application.yml"}, ignoreResourceNotFound = true)
-@SpringCloudApplication
 public class MerchantApplication {
 
     public static void main(String[] args) {

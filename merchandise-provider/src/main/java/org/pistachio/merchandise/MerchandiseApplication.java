@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * CopyRight (C),深圳市万古盛世互联科技有限公司
@@ -14,6 +15,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  */
 
 @Slf4j
+@EnableEurekaClient
 @SpringBootApplication(scanBasePackages = {"org.pistachio.*.config"})
 public class MerchandiseApplication {
 

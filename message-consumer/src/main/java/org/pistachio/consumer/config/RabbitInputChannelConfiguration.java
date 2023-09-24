@@ -3,14 +3,7 @@ package org.pistachio.consumer.config;
 import lombok.extern.slf4j.Slf4j;
 import org.pistachio.consumer.properties.RabbitConnectionProperties;
 import org.pistachio.consumer.properties.RabbitInputChannelProperties;
-import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.integration.amqp.outbound.AmqpOutboundEndpoint;
-import org.springframework.messaging.MessageHandler;
 
 import javax.annotation.Resource;
 
@@ -32,7 +25,7 @@ public class RabbitInputChannelConfiguration {
     @Resource
     private RabbitConnectionProperties rabbitConnectionProperties;
 
-    @Bean
+    /*@Bean
     ConnectionFactory buildRabbitmqConnectionFactory() {
         CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory();
         cachingConnectionFactory.setAddresses(rabbitConnectionProperties.getAddress());
@@ -41,19 +34,19 @@ public class RabbitInputChannelConfiguration {
         cachingConnectionFactory.setPassword(rabbitConnectionProperties.getPassword());
         cachingConnectionFactory.setHost(rabbitConnectionProperties.getHost());
         return cachingConnectionFactory;
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     AmqpTemplate buildRabbitAmqpTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(buildRabbitmqConnectionFactory());
         rabbitTemplate.setExchange(rabbitInputChannelProperties.getExchangeName());
         rabbitTemplate.setRoutingKey(rabbitInputChannelProperties.getRoutingKeyName());
         return rabbitTemplate;
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     MessageHandler amqpChannelAdapter() {
         return new AmqpOutboundEndpoint(buildRabbitAmqpTemplate());
-    }
+    }*/
 
 }

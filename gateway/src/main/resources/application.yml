@@ -2,7 +2,7 @@ spring:
   application:
     name: gateway
 server:
-  port: 1027
+  port: 1101
   address: localhost
   server-header: brand
 eureka:
@@ -21,7 +21,7 @@ eureka:
     enable-self-preservation: false
   client:
     service-url:
-      defaultZone: http://${server.address}:1024/eureka
+      defaultZone: http://${server.address}:1100/eureka
 #      defaultZone: http://${server.address}:${server.port}/registrationCenter_0,http://${server.address}:${server.port}/registrationCenter_1
 #      backupZone: http://${server.address}:${server.port}/registrationCenter_1
     enabled: true

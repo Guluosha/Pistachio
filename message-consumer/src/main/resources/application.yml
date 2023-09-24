@@ -1,18 +1,33 @@
 spring:
   application:
-    name: Message-Consumer
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: axd
-    password: axd@rabbitmq
-    publisher-confirms: true
-  cloud:
-    stream:
-      bindings:
-        ORDER_MESSAGE_INPUT_CHANNEL:
-          destination: OrderMainMessage
-          group: ORDER_MESSAGE_GROUP
-        MERCHANDISE_MESSAGE_INPUT_CHANNEL:
-          destination: MERCHANDISE_MESSAGE
-          group: MERCHANDISE_MESSAGE_GROUP
+    name: message-consumer
+server:
+  port: 1107
+  address: localhost
+  server-header: brand
+eureka:
+  instance:
+    instance-id: ${spring.application.name}
+    appname: ${spring.application.name}
+    #    hostname: pistachio
+    ip-address: 127.0.0.1
+    prefer-ip-address: true
+    home-page-url: http://${server.address}:${server.port}/homePage
+    health-check-url: http://${server.address}:${server.port}/healthCheck
+    initial-status: up
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+  server:
+    enable-self-preservation: false
+  client:
+    service-url:
+      defaultZone: http://${server.address}:1100/eureka
+    #      defaultZone: http://${server.address}:${server.port}/registrationCenter_0,http://${server.address}:${server.port}/registrationCenter_1
+    #      backupZone: http://${server.address}:${server.port}/registrationCenter_1
+    enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+    registry-fetch-interval-seconds: 30
+    eureka-connection-idle-timeout-seconds: 30
+    eureka-server-connect-timeout-seconds: 5
+    eureka-service-url-poll-interval-seconds: 30
