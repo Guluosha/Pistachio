@@ -1,6 +1,7 @@
 package org.pistachio.activity;
 
 import lombok.Data;
+import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -12,17 +13,14 @@ import org.springframework.stereotype.Component;
  * @date 2018/12/17 ~ 上午 11:06
  */
 
+@Getter
 @Data
 @Component
 public class People {
 
 	private String name = "哇哈哈";
 
-	public String getName() {
-		return name;
-	}
-
-	@ConfigurationProperties(prefix = "people.name", ignoreInvalidFields = true)
+    @ConfigurationProperties(prefix = "people.name", ignoreInvalidFields = true)
 	public void setName(String name) {
 		this.name = name;
 	}
